@@ -1,1 +1,66 @@
-<p>usuarios works!</p>
+<div class="container mt-4 pt-4">
+
+    <div>
+        <h2 class="text-center">USUARIOS</h2> <!--Tilde en atencion-->
+        <hr class="bg-info">
+    </div>
+    <div class="row">
+        <div class="col-1 col-sm-2 col-md-3">
+
+        </div>
+        <div class="col-10 col-sm-8 col-md-6">
+            <form #formularioUsuarios = "ngForm"> <!---->
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">DPI: </label>
+                        <input type="number" class="form-control" [(ngModel)]="usuario.dpi" name="dpi" id="exampleFormControlInput1" > <!---->
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">Nombre: </label>
+                        <input type="text" class="form-control"  [(ngModel)]="usuario.nombre" name="nombre" id="exampleFormControlInput1" > <!---->
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">Correo: </label>
+                        <input type="email" class="form-control" [(ngModel)]="usuario.correo"  name="correo" id="exampleFormControlInput1" > <!---->
+                      </div>
+
+                      <div class="form-group">
+                      <label for="exampleFormControlSelect1">Cargos:</label> <!--Tilde en region-->
+                      <select class="form-control" [(ngModel)]="usuario.cargo" name="cargo" id="exampleFormControlSelect1" > <!---->
+                        <option>Titular</option>
+                        <option>Suplente</option>
+                        <option>Encargado</option>
+                        <option>Jefe Inmediato</option>
+                        <option>Receptor de quejas</option>
+                        <option>Centralizador de quejas</option>
+                    </select>
+                </div>
+
+
+                      <label for="exampleFormControlSelect1">Region</label> <!--Tilde en region-->
+                    <select class="form-control" [(ngModel)]="usuario.region" name="region"  id="exampleFormControlSelect1" > <!---->
+                      <option>Central</option>
+                      <option>Sur</option>
+                      <option>Nororiente</option>
+                      <option>Occidente</option>
+                    </select>
+                  </div>
+    
+                <div class="form-group">
+                    <div class="row">
+                        <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                            <button type="button" class="btn btn-info" (click)="guardar();" >Guardar</button>
+                        </div>
+                        <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                            <button type="button" class="btn btn-info" routerLink="/modificarpuntosatencion">Modificar</button>
+                        </div>
+                        <div class="mt-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                            <button type="button" class="btn btn-info"  (click)="resetForm(formularioUsuarios);">Limpiar</button> <!---->
+                        </div>
+                    </div>
+                </div>
+              </form>
+        </div>
+    </div>
+
+</div>

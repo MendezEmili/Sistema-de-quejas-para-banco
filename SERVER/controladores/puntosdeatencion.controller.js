@@ -1,25 +1,45 @@
-const express = require('express');
+const conexion= require('../database');
+const puntoAtencionCtrl={};
 
-module.exports = {
-    signup: async (req, res, next) => {
 
-        const { email, username, password } = req.value.body;
+const PuntosAtencion = (puntosdeatencion)=>{
+    this.id = puntosdeatencion.id;
+    this.nombre_puntodeatencion = puntosdeatencion.nombre_puntodeatencion;
+    this.estado_puntodeatencion = puntosdeatencion.estado_puntodeatencion;
+    this.region_puntodeatencion = puntosdeatencion.region_puntodeatencion;
+    
+  };
+  
 
-        const connection = require('../database');
+puntoAtencionCtrl.selectPuntosAtencion = async(res) =>{
+    var sql = "select * from puntosdeatencion";
+    await conexion.query(sql, (err, result)=> {
+      if (err) {
+        res = err;
+        return res;
+      };
 
-        connection.query("SELECT * FROM puntosdeatencion", function(err, rows) {
-            if (rows.length) {
-                return res.json({ err: 'Email already exist'});
-            } else {
-
-                var newUserMysql = {
-                    email: email,
-                    username: username,                 
-                    password: password  
-                };
+      
+      res = result[1].id
+      console.log(res);
+      return res;
+      
+    });
 
     
 }
 
-module.exports = puntoAtencionCtrl;
 
+puntoAtencionCtrl.insertPuntosAtencion=async (req, res)=>{
+    conexion.query("INSERT INTO puntosdeatencion SET ?", newPuntosAtencion, (err, result) =>{
+      if (err) throw err;
+      console.log("1 record inserted");
+    });
+}
+
+  
+
+  module.exports=puntoAtencionCtrl;
+
+  
+  
