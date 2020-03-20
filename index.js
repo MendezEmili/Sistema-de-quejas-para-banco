@@ -15,3 +15,6 @@ app.use(cors({origin: 'http://localhost:4200'}));
 app.listen(app.get('port'), () =>{
     console.log('Servidor corriendo en puerto', app.get('port'));
 });
+
+//Llamado de rutas
+app.use('/puntosdeatencion', require('./SERVER/rutas/puntosdeatencion.rutas'));
