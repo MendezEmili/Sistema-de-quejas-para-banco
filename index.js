@@ -8,6 +8,7 @@ app.set('port', process.env.PORT || 3000);
 
 //Permitir enviar datos en formato json 
 app.use(express.json());
+//Permite recibir los datos que envia los usuarios
 app.use(express.urlencoded());
 app.use(cors({origin: 'http://localhost:4200'}));
 
