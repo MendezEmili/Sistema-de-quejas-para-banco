@@ -1,20 +1,22 @@
-var conexion=require('../database');
-const puntoAtencionCtrl = {};
+const express = require('express');
 
-puntoAtencionCtrl.selectPuntosAtencion = async(res) =>{
-    var sql = "select * from puntosdeatencion";
-    await conexion.query(sql, (err, result)=> {
-      if (err) {
-        res = err;
-        return res;
-      };
+module.exports = {
+    signup: async (req, res, next) => {
 
-      
-      res = result[1].id
-      console.log(res);
-      return res;
-      
-    });
+        const { email, username, password } = req.value.body;
+
+        const connection = require('../database');
+
+        connection.query("SELECT * FROM puntosdeatencion", function(err, rows) {
+            if (rows.length) {
+                return res.json({ err: 'Email already exist'});
+            } else {
+
+                var newUserMysql = {
+                    email: email,
+                    username: username,                 
+                    password: password  
+                };
 
     
 }
