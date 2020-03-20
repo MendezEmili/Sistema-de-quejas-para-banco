@@ -1,1 +1,43 @@
-<p>puntos-atencion works!</p>
+<div class="container mt-4 pt-4">
+
+    <div>
+        <h2 class="text-center">Puntos de Atencion</h2> <!--Tilde en atencion-->
+        <hr class="bg-info">
+    </div>
+    <div class="row">
+        <div class="col-1 col-sm-2 col-md-3">
+
+        </div>
+        <div class="col-10 col-sm-8 col-md-6">
+            <form #formularioPuntosAtencion = "ngForm"> <!---->
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Region</label> <!--Tilde en region-->
+                    <select class="form-control" [(ngModel)]="puntoAtencion.region" name="region" id="exampleFormControlSelect1" > <!---->
+                      <option>Central</option>
+                      <option>Sur</option>
+                      <option>Nororiente</option>
+                      <option>Occidente</option>
+                    </select>
+                  </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Nombre: </label>
+                  <input type="text" class="form-control" [(ngModel)]="puntoAtencion.nombre" name="nombre" id="exampleFormControlInput1" > <!---->
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                            <button type="button" class="btn btn-info" (click)="guardar();">Guardar</button>
+                        </div>
+                        <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                            <button type="button" class="btn btn-info" routerLink="/modificarpuntosatencion">Modificar</button>
+                        </div>
+                        <div class="mt-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                            <button type="button" class="btn btn-info" (click)="resetForm(formularioPuntosAtencion);">Limpiar</button> <!---->
+                        </div>
+                    </div>
+                </div>
+              </form>
+        </div>
+    </div>
+
+</div>

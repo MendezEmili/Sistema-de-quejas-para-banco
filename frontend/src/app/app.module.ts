@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule} from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,6 +9,7 @@ import { PuntosAtencionComponent } from './componentes/puntos-atencion/puntos-at
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { FooterComponent } from './componentes/footer/footer.component';
+import { ModificarComponent } from './componentes/puntos-atencion/modificar/modificar.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +18,13 @@ import { FooterComponent } from './componentes/footer/footer.component';
     PuntosAtencionComponent,
     InicioComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    ModificarComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
