@@ -1,5 +1,15 @@
-var conexion=require('../database');
-const puntoAtencionCtrl = {};
+const conexion= require('../database');
+const puntoAtencionCtrl={};
+
+
+const PuntosAtencion = (puntosdeatencion)=>{
+    this.id = puntosdeatencion.id;
+    this.nombre_puntodeatencion = puntosdeatencion.nombre_puntodeatencion;
+    this.estado_puntodeatencion = puntosdeatencion.estado_puntodeatencion;
+    this.region_puntodeatencion = puntosdeatencion.region_puntodeatencion;
+    
+  };
+  
 
 puntoAtencionCtrl.selectPuntosAtencion = async(res) =>{
     var sql = "select * from puntosdeatencion";
@@ -19,5 +29,17 @@ puntoAtencionCtrl.selectPuntosAtencion = async(res) =>{
     
 }
 
-module.exports = puntoAtencionCtrl;
 
+puntoAtencionCtrl.insertPuntosAtencion=async (req, res)=>{
+    conexion.query("INSERT INTO puntosdeatencion SET ?", newPuntosAtencion, (err, result) =>{
+      if (err) throw err;
+      console.log("1 record inserted");
+    });
+}
+
+  
+
+  module.exports=puntoAtencionCtrl;
+
+  
+  

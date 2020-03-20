@@ -5,3 +5,7 @@ conexion.query(sql, function (err, result) {
   if (err) throw err;
   console.log("Tabla creada correctamente");
 });
+
+const Puntos_Atencion = function(puntosdeatencion){
+  
+}

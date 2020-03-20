@@ -6,5 +6,5 @@ export interface Usuarios {
     cargo: string;
     puntoAtencion: string;
     region: string;
-    rol: string;
+  
 }
