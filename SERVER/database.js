@@ -8,7 +8,7 @@ var conexion = mysql.createConnection({
     database: "mipistio"
   });
 
-    /*conexion.connect(function(err) {
+  /*  conexion.connect(function(err) {
       if (err) throw err;
       console.log("Conectada correctamente");
     });

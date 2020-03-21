@@ -13,17 +13,13 @@ const PuntosAtencion = (puntosdeatencion)=>{
 
 puntoAtencionCtrl.selectPuntosAtencion = async(res) =>{
     var sql = "select * from puntosdeatencion";
-    await conexion.query(sql, (err, result)=> {
+    await conexion.query(sql, (err, resultado)=> {
       if (err) {
-        res = err;
         return res;
       };
-
       
-      res = result[1].id
-      console.log(res);
-      return res;
-      
+      console.log(resultado);
+      return res.send(resultado)     
     });
 
     
@@ -31,9 +27,27 @@ puntoAtencionCtrl.selectPuntosAtencion = async(res) =>{
 
 
 puntoAtencionCtrl.insertPuntosAtencion=async (req, res)=>{
-    conexion.query("INSERT INTO puntosdeatencion SET ?", newPuntosAtencion, (err, result) =>{
-      if (err) throw err;
-      console.log("1 record inserted");
+
+    var {estado_puntodeatencion, region_puntodeatencion} = req.body
+    var id = req.body.id;
+    var nombre_puntodeatencion = req.body.nombre_puntodeatencion;
+    region_puntodeatencion = parseInt("region_puntodeatencion", 10);
+    console.log(region_puntodeatencion)
+    var puntoAtencion ={
+      id,
+      nombre_puntodeatencion,
+      estado_puntodeatencion,
+      region_puntodeatencion
+    }
+    console.log(puntoAtencion)
+    await conexion.query("INSERT INTO puntosdeatencion SET ?", puntoAtencion, (err, result) =>{
+      if (err) {
+        console.log("No fue posible insertar")
+        return res.status(400).send("No fue posible insertar");
+      } else {
+        console.log("Insertado correctamente");
+        return res.status(200);
+      }
     });
 }
 
