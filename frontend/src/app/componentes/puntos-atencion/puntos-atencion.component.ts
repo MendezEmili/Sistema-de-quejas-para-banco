@@ -17,16 +17,16 @@ export class PuntosAtencionComponent implements OnInit {
 
   puntoAtencion: PuntosAtencion = {
     id: 0,
-    nombre: '',
-    estado: 0,
-    region: ''
+    nombre_puntodeatencion: '',
+    estado_puntodeatencion: 0,
+    region_puntodeatencion: ''
   }
 
   puntosAtencion: any = []
 
 
   region: Region = {
-    id: 0,
+    id_region: 0,
     nombre_region: ''
   }
 
@@ -51,15 +51,15 @@ export class PuntosAtencionComponent implements OnInit {
     form.reset();
   }
   guardar(){
-    var region = this.puntoAtencion.region.split(".");
-    this.puntoAtencion.region = region[0];
-    this.puntoAtencion.nombre = this.puntoAtencion.nombre.trim();
-    this.puntoAtencion.estado = 1;
+    var region = this.puntoAtencion.region_puntodeatencion.split(".");
+    this.puntoAtencion.region_puntodeatencion = region[0];
+    this.puntoAtencion.nombre_puntodeatencion = this.puntoAtencion.nombre_puntodeatencion.trim();
+    this.puntoAtencion.estado_puntodeatencion = 1;
     console.log(this.puntoAtencion)
     this.catalogosService.postPuntosAtencion(this.puntoAtencion).subscribe(
       res =>{
-        console.log("Insertado")
-        alert("Se guardo correctamente los datos del punto de atención " + this.puntoAtencion.nombre);
+        console.log(res)
+        alert("Se guardo correctamente los datos del punto de atención " + this.puntoAtencion.nombre_puntodeatencion);
       },
       err =>{
         this.error = err;
@@ -68,5 +68,6 @@ export class PuntosAtencionComponent implements OnInit {
     )
 
   }
+
 
 }

@@ -1,4 +1,4 @@
 export interface Region {
-    id: number,
+    id_region: number,
     nombre_region: string
 }

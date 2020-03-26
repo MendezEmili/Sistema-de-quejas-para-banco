@@ -1,40 +1,29 @@
 const conexion= require('../database');
+const express = require('express');
+const app = express();
 const puntoAtencionCtrl={};
 
-
-const PuntosAtencion = (puntosdeatencion)=>{
-    this.id = puntosdeatencion.id;
-    this.nombre_puntodeatencion = puntosdeatencion.nombre_puntodeatencion;
-    this.estado_puntodeatencion = puntosdeatencion.estado_puntodeatencion;
-    this.region_puntodeatencion = puntosdeatencion.region_puntodeatencion;
-    
-  };
-  
-
 puntoAtencionCtrl.selectPuntosAtencion = async(res) =>{
-    var sql = "select * from puntosdeatencion";
-    await conexion.query(sql, (err, resultado)=> {
-      if (err) {
-        return res;
-      };
-      
+  var sql = `select * from puntosdeatencion`;
+  await conexion.query(sql, (err, resultado)=> {
+    if (err) {
+      console.log(err)
+      return res.status(500).send("Error en consulta");
+    } else {
       console.log(resultado);
-      return res.send(resultado)     
-    });
-
-    
+      return res.status(200).send("Resultados de busqueda: ")
+    }  
+  });   
 }
 
 
 puntoAtencionCtrl.insertPuntosAtencion=async (req, res)=>{
 
-    var {estado_puntodeatencion, region_puntodeatencion} = req.body
-    var id = req.body.id;
+    var estado_puntodeatencion = req.body.estado_puntodeatencion;
+    var region_puntodeatencion = req.body.region_puntodeatencion;
     var nombre_puntodeatencion = req.body.nombre_puntodeatencion;
-    region_puntodeatencion = parseInt("region_puntodeatencion", 10);
-    console.log(region_puntodeatencion)
+
     var puntoAtencion ={
-      id,
       nombre_puntodeatencion,
       estado_puntodeatencion,
       region_puntodeatencion
@@ -46,14 +35,63 @@ puntoAtencionCtrl.insertPuntosAtencion=async (req, res)=>{
         return res.status(400).send("No fue posible insertar");
       } else {
         console.log("Insertado correctamente");
-        return res.status(200);
+        return res.json({
+          status: 200,
+          mensaje: "Insertado correctamente"
+        })
       }
     });
 }
 
+puntoAtencionCtrl.actualizarPuntoAtencion = async(req, res)=>{
+  var id = req.params.id;
+  var {nombre_puntodeatencion, estado_puntodeatencion} = req.body
+  var sql = `UPDATE puntosdeatencion SET nombre_puntodeatencion=${nombre_puntodeatencion}, estado_puntodeatencion=${estado_puntodeatencion} WHERE id=${id} `
+
+  await conexion.query(sql, (err, result)=>{
+    if(err){
+      return res.status(500).send("No fue posible actualizar");
+    } else {
+      return res.status(200).send("Actualizado")
+    }
+  })
+}
+
+puntoAtencionCtrl.selectPuntoAtencionID = async(req, res) =>{
+  var id = req.params.id;
+  var sql = `select * from puntosdeatencion WHERE id=${id}`;
+  await conexion.query(sql, (err, resultado)=> {
+    if (err) {
+      console.log(err)
+      return res.status(500).send("Error en consulta");
+    } else {
+      console.log(resultado);
+      return res.json({
+        id: 1,
+        nombre_puntodeatencion: resultado[0].nombre_puntodeatencion,
+        estado_puntodeatencion: resultado[0].estado_puntodeatencion,
+        region_puntodeatencion: resultado[0].region_puntodeatencion
+      })
+    }  
+  });   
+}
+
+puntoAtencionCtrl.selectPuntoAtencionRegion = async(req, res) =>{
+  var region = req.params.region;
+  var sql = `select * from puntosdeatencion WHERE id=${region}`;
+  await conexion.query(sql, (err, resultado)=> {
+    if (err) {
+      console.log(err)
+      return res.status(500).send("Error en consulta");
+    } else {
+      console.log(resultado);
+      return res.status(200).send("Resultados de busqueda: " )
+    }  
+  });   
+}
   
 
-  module.exports=puntoAtencionCtrl;
+  module.exports = puntoAtencionCtrl;
 
   
   

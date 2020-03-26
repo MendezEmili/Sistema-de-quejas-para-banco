@@ -16,9 +16,13 @@ export class CatalogosService {
 
   //Catalogo de Puntos de atencion 
   postPuntosAtencion(puntoAtencion: PuntosAtencion){
+    console.log(puntoAtencion);
     return this.http.post(`${this.URL_API_PA}insertar`, puntoAtencion);
   }
 
+  buscarPuntoAtencionID(id: number){
+    return this.http.get(`${this.URL_API_PA}buscar/${id}`);
+  }
 
   //Regiones 
   getRegiones(){

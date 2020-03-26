@@ -1,6 +1,6 @@
 export interface PuntosAtencion {
     id: number;
-    nombre: string;
-    estado: number;
-    region: string;
+    nombre_puntodeatencion: string;
+    estado_puntodeatencion: number;
+    region_puntodeatencion: string;
 }
