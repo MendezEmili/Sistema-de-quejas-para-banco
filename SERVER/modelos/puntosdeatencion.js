@@ -1,11 +1,11 @@
 var conexion=require('../database');
 
-var sql = "CREATE TABLE puntosdeatencion (id int (20) not null PRIMARY key,nombre_puntodeatencion varchar (50) not null, estado_puntodeatencion int (2) not null,  region_puntodeatencion varchar (10) not null)";
-conexion.query(sql, function (err, result) {
-  if (err) throw err;
-  console.log("Tabla creada correctamente");
-});
-
 const Puntos_Atencion = function(puntosdeatencion){
-  
+  id: Number;
+  nombre_puntodeatencion: String;
+  estado_puntodeatencion: Number;
+  region_puntodeatencion: Number;
 }
+
+
+module.exports = Puntos_Atencion;
