@@ -60,6 +60,7 @@ export class PuntosAtencionComponent implements OnInit {
       res =>{
         console.log(res)
         alert("Se guardo correctamente los datos del punto de atención " + this.puntoAtencion.nombre_puntodeatencion);
+        location.reload()
       },
       err =>{
         this.error = err;
