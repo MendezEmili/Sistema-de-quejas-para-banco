@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { PuntosAtencion } from '../modelos/puntos-atencion';
+import { Usuarios } from '../modelos/usuarios';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class CatalogosService {
   baseURL = environment.backendURL;
 
   URL_API_PA = this.baseURL + 'puntosdeatencion/';
-  URL_API_R = this.baseURL + 'region/'
+  URL_API_R = this.baseURL + 'region/';
+  URL_API_US= this.baseURL + 'usuarios/'
 
   constructor(private http: HttpClient) { }
 
@@ -36,9 +38,14 @@ export class CatalogosService {
   getRegiones(){
     return this.http.get(`${this.URL_API_R}obtener`);
   }
-
+  
   getRegionID(id_region){
     return this.http.get(`${this.URL_API_R}buscar/${id_region}`);
   }
 
+  //catalogo de usuarios
+  postUsuarios(usuarios:Usuarios){
+    console.log(usuarios);
+    return this.http.post(`${this.URL_API_US}insertar`,usuarios);
+  }
 }
