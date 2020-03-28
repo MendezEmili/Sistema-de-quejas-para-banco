@@ -25,6 +25,7 @@ usuariosCtrl.insertUsuario=async (req, res)=>{
     var correo_usuario= req.body.correo_usuario;
     var estado_usuario= req.body.estado_usuario;
     var region= req.body.region;
+    var cargo_usuario= req.body.cargo_usuario;
     var id_puntosdeatencion=req.body.id_puntosdeatencion;
 
 
@@ -34,6 +35,7 @@ usuariosCtrl.insertUsuario=async (req, res)=>{
     correo_usuario,
     estado_usuario,
     region,
+    cargo_usuario,  
     id_puntosdeatencion
     }
     console.log(usuarios)
