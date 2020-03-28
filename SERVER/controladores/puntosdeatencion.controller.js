@@ -86,6 +86,7 @@ puntoAtencionCtrl.selectPuntoAtencionRegion = async(req, res) =>{
     } else {
       console.log(resultado);
       return res.status(200).send("Resultados de busqueda: " )
+
     }  
   });   
 }
