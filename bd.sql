@@ -8,7 +8,7 @@ create TABLE puntosdeatencion(
 create table rol( id_rol int AUTO_INCREMENT PRIMARY key, tipo_rol varchar (30));
 
 create table usuarios(
- 	dpi int (15) primary key,
+ 	dpi Bigint (15) primary key,
     nombre_usuario varchar (50) not null,
     correo_usuario varchar (50) not null, 
     estado_usuario varchar (40) not null,

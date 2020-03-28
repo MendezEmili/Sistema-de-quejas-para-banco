@@ -44,6 +44,8 @@ export class UsuariosComponent implements OnInit {
   usuarios:any=[]
   regiones:any=[]
   error:any;
+  usuarioDPI: any;
+  nombre: any;
 
   constructor(private catalogosServices: CatalogosService) { }
 
@@ -88,6 +90,39 @@ export class UsuariosComponent implements OnInit {
         alert(this.error.error)
       }
     )
+    /*this.catalogosServices.buscarUsuarioDPI(this.usuario.dpi).subscribe(
+      res=>{
+        this.usuarioDPI = res; 
+        if(this.usuarioDPI.length >0){
+          this.catalogosServices.buscarPuntoAtencionID(this.usuarioDPI.id_puntosdeatencion).subscribe(
+            res =>{
+              this.nombre = res; 
+              alert("Error al guardar datos, el usuario existe en el punto de atencion" + this.nombre.nombre_puntodeatencion)
+            }, 
+            err =>{
+              console.log(err)
+            }
+          )
+        
+        } else {
+          this.catalogosServices.postUsuarios(this.usuario).subscribe(
+            res =>{
+              console.log(res)
+              alert("Se guardo correctamente los datos del usuario" + this.usuario.nombre_usuario);
+            },
+            err =>{
+              this.error = err;
+              console.log("Error: " + this.error.error);
+              alert(this.error.error)
+            }
+          )
+        }
+      }, 
+      err=>{
+        console.log(err)
+        alert("Error al verificar usuario")
+      }
+    )*/
 
   }
 
@@ -108,4 +143,6 @@ export class UsuariosComponent implements OnInit {
   establecerValores(id){
     this.usuario.id_puntosdeatencion = id; 
   }
+
+
 }

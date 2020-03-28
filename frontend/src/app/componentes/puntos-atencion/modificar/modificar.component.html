@@ -10,18 +10,19 @@
         </div>
         <div class="col-10 col-sm-8 col-md-6">
             <form #formularioPuntosAtencion = "ngForm"> <!---->
-                  <div class="form-group">
-                    <label for="Puntos de atecion">Región</label>
-                    <select multiple class="form-control" id="exampleFormControlSelect2">
-                        <option *ngFor="let region of regiones" (click)="buscar(region.id_region, region.nombre_region)">{{region.id_region}}. {{region.nombre_region}}</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleFormControlSelect2">Puntos de atención</label>
-                    <select multiple class="form-control" id="puntosdeatencion">
-                      <option *ngFor="let puntoAtencion of puntosAtencion" data-toggle="modal" data-target="#exampleModal" (click)="establecerValores(puntoAtencion.id, puntoAtencion.nombre_puntodeatencion, puntoAtencion.estado_puntodeatencion)">{{puntoAtencion.nombre_puntodeatencion}}</option>
-                    </select>
-                  </div>
+              <div class="form-group">
+                <label for="Puntos de atecion">Región</label>
+                <select multiple class="form-control" id="puntosdeatencion">
+                    <option *ngFor="let region of regiones" (click)="buscar(region.id_region, region.nombre_region)">{{region.id_region}}. {{region.nombre_region}}</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="exampleFormControlSelect2">Puntos de atención</label>
+                <select multiple class="form-control" id="exampleFormControlSelect2">
+                  <option *ngFor="let puntoAtencion of puntosAtencion" data-toggle="modal" data-target="#exampleModal" (click)="establecerValores(puntoAtencion.id)">{{puntoAtencion.nombre_puntodeatencion}}</option>
+                </select>
+              </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="mt-2 col-8 col-sm-7 col-md-4 col-lg-3">
@@ -60,8 +61,8 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="exampleFormControlSelect2">Estado de Punto de Atención</label>
-                  <select class="form-control" id="exampleFormControlSelect2" [(ngModel)]="puntoAtencion.estado_puntodeatencion" name="estado_puntodeatencion">
+                  <label for="modificarPuntoAtencion">Estado de Punto de Atención</label>
+                  <select class="form-control" id="modificarPuntoAtencion" [(ngModel)]="puntoAtencion.estado_puntodeatencion" name="estado_puntodeatencion">
                     <option>Activo</option>
                     <option>Inactivo</option>
                   </select>

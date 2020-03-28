@@ -54,4 +54,8 @@ export class CatalogosService {
   inactivarUsuarios(id, usuarios: Usuarios){
     return this.http.put(`${this.URL_API_US}/inactivar/${id}`, usuarios);
   }
+
+  buscarUsuarioDPI(dpi){
+    return this.http.get(`${this.URL_API_US}buscar/${dpi}`)
+  }
 }

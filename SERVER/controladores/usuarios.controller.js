@@ -74,7 +74,7 @@ usuariosCtrl.selectUsuariosdpi = async(req, res) =>{
 
 usuariosCtrl.contarUsuariosPuntoAtencion = async(req, res) =>{
   var id_puntosdeatencion = req.params.id
-  var sql = `select count(dpi) from usuarios WHERE id_puntosdeatencion=${id_puntosdeatencion}`;
+  var sql = `select * from usuarios WHERE id_puntosdeatencion=${id_puntosdeatencion}`;
   await conexion.query(sql, (err, resultado)=>{
     if (err){
       console.log(err);
@@ -83,7 +83,7 @@ usuariosCtrl.contarUsuariosPuntoAtencion = async(req, res) =>{
       })
     } else {
       console.log(resultado)
-      return res.json(resultado[0])
+      return res.json(resultado)
     }
   })
 }

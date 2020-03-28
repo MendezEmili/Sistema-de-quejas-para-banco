@@ -31,6 +31,7 @@ export class ModificarComponent implements OnInit {
     id_region: 0,
     nombre_region: ''
   }
+  
   regiones: any = {}
   countUsuarios: any = {}
 
@@ -91,7 +92,7 @@ export class ModificarComponent implements OnInit {
       await this.catalogosService.contarUsuarios(this.puntoAtencion.id).toPromise().then(
         res =>{
           this.countUsuarios = res;
-          totalUsuarios = this.countUsuarios 
+          totalUsuarios = this.countUsuarios.length;
           console.log(totalUsuarios)
         }
       ).catch(
