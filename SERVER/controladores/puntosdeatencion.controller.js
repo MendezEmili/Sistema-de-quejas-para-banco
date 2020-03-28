@@ -1,6 +1,7 @@
 const conexion= require('../database');
 const express = require('express');
 const app = express();
+const fecha = require('../modelos/fechas')
 const puntoAtencionCtrl={};
 
 puntoAtencionCtrl.selectPuntosAtencion = async(req, res) =>{
@@ -22,11 +23,13 @@ puntoAtencionCtrl.insertPuntosAtencion=async (req, res)=>{
     var estado_puntodeatencion = req.body.estado_puntodeatencion;
     var region_puntodeatencion = req.body.region_puntodeatencion;
     var nombre_puntodeatencion = req.body.nombre_puntodeatencion;
+    var fecha_creacion = fecha.fecha();
 
     var puntoAtencion ={
       nombre_puntodeatencion,
       estado_puntodeatencion,
-      region_puntodeatencion
+      region_puntodeatencion,
+      fecha_creacion
     }
     console.log(puntoAtencion)
     await conexion.query("INSERT INTO puntosdeatencion SET ?", puntoAtencion, (err, result) =>{
