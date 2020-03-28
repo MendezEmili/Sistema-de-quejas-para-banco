@@ -75,7 +75,7 @@ export class UsuariosComponent implements OnInit {
     this.usuario.estado_usuario = 1;
     var fecha=Date.now();
     this.usuarios.fecha=this.usuarios.fecha_creacion;
- 
+    
     console.log(this.usuario)
     this.catalogosServices.postUsuarios(this.usuario).subscribe(
       res =>{
