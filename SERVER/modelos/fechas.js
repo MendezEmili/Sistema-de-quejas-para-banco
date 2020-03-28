@@ -4,8 +4,8 @@ fechaActual.fecha = any =>{
     var dd = fecha.getDate();
     var mm = fecha.getMonth()+1;
     var yy = fecha.getFullYear();
-
-    return `${yy}-${mm}-${dd}`
+    var hora = fecha.getHours() +":"+fecha.getMinutes()+":"+fecha.getSeconds();
+    return `${yy}-${mm}-${dd} ${hora}`
 }
 
 
