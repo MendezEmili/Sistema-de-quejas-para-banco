@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroupDirective , Validators} from '@angular/forms';
 import { NgForm } from '@angular/forms'
 
 //Importar rutas para consumo de servicios 
@@ -9,11 +10,14 @@ import {Usuarios} from '../../modelos/usuarios';
 import {PuntosAtencion} from '../../modelos/puntos-atencion';
 import { Region } from '../../modelos/region';
 
+
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.css']
 })
+
+
 export class UsuariosComponent implements OnInit {
 
   usuario : Usuarios = {
@@ -22,13 +26,24 @@ export class UsuariosComponent implements OnInit {
     correo_usuario: '',
     cargo_usuario: '',
     region: 0,
-    id_puntosdeatencion: 1,
-    estado_usuario: 1
+    id_puntosdeatencion: 0,
+    estado_usuario: 1,
+    fecha_creacion: new Date()
     
   }
+
+  puntoAtencion: PuntosAtencion ={
+    id: 0,
+    nombre_puntodeatencion: '',
+    estado_puntodeatencion: 0,
+    region_puntodeatencion: ''
+  }
+
+  puntosAtencion:any=[]
   usuarios:any=[]
   regiones:any=[]
   error:any;
+
   constructor(private catalogosServices: CatalogosService) { }
 
   ngOnInit(): void {
@@ -47,7 +62,10 @@ export class UsuariosComponent implements OnInit {
     form.reset();
   }
   
+  
+  
   guardar(){
+   
     var usuario = this.usuario.dpi=this.usuario.dpi;
     this.usuario.nombre_usuario=this.usuario.nombre_usuario.trim();
     this.usuario.correo_usuario=this.usuario.correo_usuario.trim();
@@ -55,6 +73,9 @@ export class UsuariosComponent implements OnInit {
     this.usuario.region=this.usuario.region;
     this.usuario.id_puntosdeatencion = 1; 
     this.usuario.estado_usuario = 1;
+    var fecha=Date.now();
+    this.usuarios.fecha=this.usuarios.fecha_creacion;
+ 
     console.log(this.usuario)
     this.catalogosServices.postUsuarios(this.usuario).subscribe(
       res =>{
@@ -69,4 +90,21 @@ export class UsuariosComponent implements OnInit {
 
   }
 
+
+  buscar(id_region, nombre_region){
+    this.catalogosServices.buscarPuntoAtencionRegion(id_region).subscribe(
+      res=>{
+        this.puntosAtencion = res;
+        console.log(res)
+      },
+      err =>{
+        console.log(err)
+      }
+    )
+    this.puntosAtencion.region_puntodeatencion = nombre_region
+  }
+  establecerValores(id, nombre_puntodeatencion, estado_puntodeatencion){
+    this.puntosAtencion.id = id; 
+    this.puntosAtencion.nombre_puntodeatencion = nombre_puntodeatencion
+  }
 }

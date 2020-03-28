@@ -25,7 +25,9 @@ usuariosCtrl.insertUsuario=async (req, res)=>{
     var correo_usuario= req.body.correo_usuario;
     var estado_usuario= req.body.estado_usuario;
     var region= req.body.region;
+    var cargo_usuario= req.body.cargo_usuario;
     var id_puntosdeatencion=req.body.id_puntosdeatencion;
+    var fecha_creacion= req.body.fecha_creacion;
 
 
     var usuarios ={
@@ -34,7 +36,9 @@ usuariosCtrl.insertUsuario=async (req, res)=>{
     correo_usuario,
     estado_usuario,
     region,
-    id_puntosdeatencion
+    cargo_usuario,  
+    id_puntosdeatencion,
+    fecha_creacion
     }
     console.log(usuarios)
     await conexion.query("INSERT INTO usuarios SET ?", usuarios, (err, result) =>{

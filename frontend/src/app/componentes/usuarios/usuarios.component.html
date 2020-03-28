@@ -10,15 +10,18 @@
         </div>
         <div class="col-10 col-sm-8 col-md-6">
             <form #formularioUsuarios = "ngForm"> <!---->
-                <div class="form-group">
-                    <div class="form-group">
+                
+                    
+                      <div class="form-group">
                         <label for="exampleFormControlInput1">DPI: </label>
                         <input type="number" class="form-control" [(ngModel)]="usuario.dpi" name="dpi" id="exampleFormControlInput1" > <!---->
                       </div>
+
                       <div class="form-group">
                         <label for="exampleFormControlInput1">Nombre: </label>
                         <input type="text" class="form-control"  [(ngModel)]="usuario.nombre_usuario" name="nombre_usuario" id="exampleFormControlInput1" > <!---->
                       </div>
+
                       <div class="form-group">
                         <label for="exampleFormControlInput1">Correo: </label>
                         <input type="email" class="form-control" [(ngModel)]="usuario.correo_usuario"  name="correo_usuario" id="exampleFormControlInput1" > <!---->
@@ -33,26 +36,35 @@
                         <option>Jefe Inmediato</option>
                         <option>Receptor de quejas</option>
                         <option>Centralizador de quejas</option>
-                    </select>
-                </div>
+                         </select>
+                         </div>
+                            
 
+                         <div class="form-group">
+                            <label for="Puntos de atecion">Región</label>
+                            <select multiple class="form-control" id="exampleFormControlSelect2">
+                                <option *ngFor="let region of regiones" (click)="buscar(region.id_region, region.nombre_region)">{{region.id_region}}. {{region.nombre_region}}</option>
+                            </select>
+                          </div>
+                          
+                          <div class="form-group">
+                            <label for="exampleFormControlSelect2">Puntos de atención</label>
+                            <select multiple class="form-control" id="puntosdeatencion">
+                              <option *ngFor="let puntoAtencion of puntosAtencion" data-toggle="modal" data-target="#exampleModal" (click)="establecerValores(puntoAtencion.id, puntoAtencion.nombre_puntodeatencion, puntoAtencion.estado_puntodeatencion)">{{puntoAtencion.nombre_puntodeatencion}}</option>
+                            </select>
+                          </div>
 
-                      <label for="exampleFormControlSelect1">Región</label> <!--Tilde en region-->
-                      <select class="form-control" [(ngModel)]="usuario.region" name="region" id="exampleFormControlSelect1" > <!---->
-                        <option></option>
-                        <option *ngFor="let region of regiones">{{region.id_region}}. {{region.nombre_region}}</option>
-                      </select>
-                  </div>
-                  
-                <div class="form-group">
-                    <div class="row">
+                     
+                        <br>
+                        <div class="form-group">
+                        <div class="row">
                         <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
                             <button type="button" class="btn btn-info" (click)="guardar();" >Guardar</button>
-                        </div>
-                        <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                         </div>
+                         <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
                             <button type="button" class="btn btn-info" >Modificar</button>
-                        </div>
-                        <div class="mt-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                         </div>
+                         <div class="mt-2 col-8 col-sm-7 col-md-4 col-lg-3">
                             <button type="button" class="btn btn-info"  (click)="resetForm(formularioUsuarios);">Cancelar</button> <!---->
                         </div>
                     </div>
