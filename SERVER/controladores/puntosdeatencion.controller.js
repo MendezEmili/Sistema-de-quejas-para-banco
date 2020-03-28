@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const puntoAtencionCtrl={};
 
-puntoAtencionCtrl.selectPuntosAtencion = async(res) =>{
+puntoAtencionCtrl.selectPuntosAtencion = async(req, res) =>{
   var sql = `select * from puntosdeatencion`;
   await conexion.query(sql, (err, resultado)=> {
     if (err) {
@@ -11,7 +11,7 @@ puntoAtencionCtrl.selectPuntosAtencion = async(res) =>{
       return res.status(500).send("Error en consulta");
     } else {
       console.log(resultado);
-      return res.status(200).send("Resultados de busqueda: ")
+      return res.json(resultado)
     }  
   });   
 }
@@ -45,14 +45,23 @@ puntoAtencionCtrl.insertPuntosAtencion=async (req, res)=>{
 
 puntoAtencionCtrl.actualizarPuntoAtencion = async(req, res)=>{
   var id = req.params.id;
-  var {nombre_puntodeatencion, estado_puntodeatencion} = req.body
-  var sql = `UPDATE puntosdeatencion SET nombre_puntodeatencion=${nombre_puntodeatencion}, estado_puntodeatencion=${estado_puntodeatencion} WHERE id=${id} `
+  var estado_puntodeatencion = req.body.estado_puntodeatencion;
+  var nombre_puntodeatencion = req.body.nombre_puntodeatencion;
+  console.log(id, estado_puntodeatencion, nombre_puntodeatencion)
+  var sql = `UPDATE puntosdeatencion SET nombre_puntodeatencion="${nombre_puntodeatencion}", estado_puntodeatencion=${estado_puntodeatencion} WHERE id=${id}`
 
   await conexion.query(sql, (err, result)=>{
     if(err){
-      return res.status(500).send("No fue posible actualizar");
+      return res.json({
+        status: 500,
+        mensaje: "Error al actualizar"
+      })
     } else {
-      return res.status(200).send("Actualizado")
+      console.log("Actualizado")
+      return res.json({
+        status: 200,
+        mensaje: "Datos actualizados"
+      })
     }
   })
 }
@@ -78,15 +87,14 @@ puntoAtencionCtrl.selectPuntoAtencionID = async(req, res) =>{
 
 puntoAtencionCtrl.selectPuntoAtencionRegion = async(req, res) =>{
   var region = req.params.region;
-  var sql = `select * from puntosdeatencion WHERE id=${region}`;
+  var sql = `select * from puntosdeatencion WHERE region_puntodeatencion=${region}`;
   await conexion.query(sql, (err, resultado)=> {
     if (err) {
       console.log(err)
       return res.status(500).send("Error en consulta");
     } else {
       console.log(resultado);
-      return res.status(200).send("Resultados de busqueda: " )
-
+      res.json(resultado)
     }  
   });   
 }

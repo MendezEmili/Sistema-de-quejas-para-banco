@@ -26,9 +26,21 @@ export class CatalogosService {
     return this.http.get(`${this.URL_API_PA}buscar/${id}`);
   }
 
+  buscarPuntoAtencionRegion(region){
+    return this.http.get(`${this.URL_API_PA}buscarregion/${region}`);
+  }
+
+  actualizarPuntoAtencion(id, puntoAtencion: PuntosAtencion){
+    return this.http.put(`${this.URL_API_PA}actualizar/${id}`, puntoAtencion);
+  }
+
   //Regiones 
   getRegiones(){
     return this.http.get(`${this.URL_API_R}obtener`);
+  }
+  
+  getRegionID(id_region){
+    return this.http.get(`${this.URL_API_R}buscar/${id_region}`);
   }
 
   //catalogo de usuarios

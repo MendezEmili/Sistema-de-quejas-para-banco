@@ -36,11 +36,7 @@ regionesCtrl.selectRegionID = async(req, res) =>{
     }
     else{     
       console.log(resultado);
-      return res.json({
-        status: 200,
-        id_region: resultado[0].id_region,
-        nombre_region: resultado[0].nombre_region
-      })
+      return res.json(resultado)
     }
     
   });
@@ -69,7 +65,6 @@ regionesCtrl.insertRegion = async(req, res) =>{
 regionesCtrl.actualizarRegion = async(req, res)=>{
   var id_region = req.params.id_region; 
   var nombre_region = req.body;
-  console.log(id_region)
   var sql = `UPDATE regiones SET nombre_region="${nombre_region}" WHERE id_region=${id_region}`
 
   await conexion.query(sql, (err, result)=>{
