@@ -1,4 +1,5 @@
 const conexion= require('../database');
+const fecha = require('../modelos/fechas')
 const express = require('express');
 const app = express();
 const usuariosCtrl={};
@@ -27,10 +28,9 @@ usuariosCtrl.insertUsuario=async (req, res)=>{
     var region= req.body.region;
     var cargo_usuario= req.body.cargo_usuario;
     var id_puntosdeatencion=req.body.id_puntosdeatencion;
-    var fecha_creacion= req.body.fecha_creacion;
+    var fecha_creacion= fecha.fecha();
 
-
-    var usuarios ={
+    var usuario ={
     dpi,
     nombre_usuario,
     correo_usuario,
@@ -40,8 +40,8 @@ usuariosCtrl.insertUsuario=async (req, res)=>{
     id_puntosdeatencion,
     fecha_creacion
     }
-    console.log(usuarios)
-    await conexion.query("INSERT INTO usuarios SET ?", usuarios, (err, result) =>{
+    console.log(usuario)
+    await conexion.query("INSERT INTO usuarios SET ?", usuario, (err, result) =>{
       if (err) {
         console.log("No fue posible insertar")
         return res.status(400).send("No fue posible insertar");

@@ -50,7 +50,7 @@
                           <div class="form-group">
                             <label for="exampleFormControlSelect2">Puntos de atención</label>
                             <select multiple class="form-control" id="puntosdeatencion">
-                              <option *ngFor="let puntoAtencion of puntosAtencion" data-toggle="modal" data-target="#exampleModal" (click)="establecerValores(puntoAtencion.id, puntoAtencion.nombre_puntodeatencion, puntoAtencion.estado_puntodeatencion)">{{puntoAtencion.nombre_puntodeatencion}}</option>
+                              <option *ngFor="let puntoAtencion of puntosAtencion" data-toggle="modal" data-target="#exampleModal" (click)="establecerValores(puntoAtencion.id)">{{puntoAtencion.nombre_puntodeatencion}}</option>
                             </select>
                           </div>
                        
