@@ -1,5 +1,5 @@
 module.exports = {
-    SECRET_TOKEN: 'tokencolegio',
+    SECRET_TOKEN: 'tokenMiPistio',
 
 
     BASE_URL: 'localhost'

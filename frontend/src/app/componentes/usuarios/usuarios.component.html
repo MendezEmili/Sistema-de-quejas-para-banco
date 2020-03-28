@@ -65,7 +65,7 @@
                             <button type="button" class="btn btn-info" (click)="guardar();" >Guardar</button>
                          </div>
                          <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
-                            <button type="button" class="btn btn-info" >Modificar</button>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Modificar</button>
                          </div>
                          <div class="mt-2 col-8 col-sm-7 col-md-4 col-lg-3">
                             <button type="button" class="btn btn-info"  (click)="resetForm(formularioUsuarios);">Cancelar</button> <!---->
@@ -76,4 +76,69 @@
         </div>
     </div>
 
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modificar Datos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="Puntos de atecion">Región</label>
+              <select multiple class="form-control" id="exampleFormControlSelect2">
+                  <option *ngFor="let region of regiones" (click)="buscar(region.id_region, region.nombre_region)">{{region.id_region}}. {{region.nombre_region}}</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="exampleFormControlSelect2">Puntos de atención</label>
+              <select multiple class="form-control" id="puntosdeatencion">
+                <option *ngFor="let puntoAtencion of puntosAtencion" data-toggle="modal" data-target="#exampleModal" (click)="establecerValores(puntoAtencion.id)">{{puntoAtencion.nombre_puntodeatencion}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect2">Usuarios</label>
+              <select multiple class="form-control" id="puntosdeatencion">
+                <!--<option *ngFor="let puntoAtencion of puntosAtencion" data-toggle="modal" data-target="#exampleModal" (click)="establecerValores(puntoAtencion.id)">{{puntoAtencion.nombre_puntodeatencion}}</option>-->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Correo </label>
+              <div>
+                <input type="email" [(ngModel)]="puntoAtencion.nombre_puntodeatencion" name="nombre_puntodeatencion">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Cargos:</label> <!--Tilde en region-->
+              <select class="form-control" [(ngModel)]="usuario.cargo_usuario" name="cargo_usuario" id="exampleFormControlSelect1" > <!---->
+                <option>Titular</option>
+                <option>Suplente</option>
+                <option>Encargado</option>
+                <option>Jefe Inmediato</option>
+                <option>Receptor de quejas</option>
+                <option>Centralizador de quejas</option>
+                 </select>
+                 </div>
+              <div class="form-group">
+                <label for="modificarPuntoAtencion">Estado</label>
+                <select class="form-control" id="modificarPuntoAtencion" [(ngModel)]="puntoAtencion.estado_puntodeatencion" name="estado_puntodeatencion">
+                  <option>Activo</option>
+                  <option>Inactivo</option>
+                </select>
+              </div>
+            </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" routerLink="/puntosatencion">Cancelar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
 </div>

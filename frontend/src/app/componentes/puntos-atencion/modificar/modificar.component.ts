@@ -31,7 +31,7 @@ export class ModificarComponent implements OnInit {
     id_region: 0,
     nombre_region: ''
   }
-  
+
   regiones: any = {}
   countUsuarios: any = {}
 
@@ -79,7 +79,7 @@ export class ModificarComponent implements OnInit {
     this.puntoAtencion.region_puntodeatencion = nombre_region
   }
 
-  establecerValores(id, nombre_puntodeatencion, estado_puntodeatencion){
+  establecerValores(id, nombre_puntodeatencion){
     this.puntoAtencion.id = id; 
     this.puntoAtencion.nombre_puntodeatencion = nombre_puntodeatencion
   }

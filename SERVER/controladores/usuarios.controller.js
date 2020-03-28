@@ -109,6 +109,12 @@ usuariosCtrl.inactivarUsuarios = async(req, res)=>{
   })
 }
 
+
+usuariosCtrl.editarUsuario = async(req, res)=>{
+  
+
+}
+
   
 
   module.exports = usuariosCtrl;
