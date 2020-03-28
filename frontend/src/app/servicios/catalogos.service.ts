@@ -18,7 +18,6 @@ export class CatalogosService {
 
   //Catalogo de Puntos de atencion 
   postPuntosAtencion(puntoAtencion: PuntosAtencion){
-    console.log(puntoAtencion);
     return this.http.post(`${this.URL_API_PA}insertar`, puntoAtencion);
   }
 
@@ -45,7 +44,14 @@ export class CatalogosService {
 
   //catalogo de usuarios
   postUsuarios(usuarios:Usuarios){
-    console.log(usuarios);
     return this.http.post(`${this.URL_API_US}insertar`,usuarios);
+  }
+
+  contarUsuarios(id){
+    return this.http.get(`${this.URL_API_US}contar/${id}`);
+  }
+
+  inactivarUsuarios(id, usuarios: Usuarios){
+    return this.http.put(`${this.URL_API_US}/inactivar/${id}`, usuarios);
   }
 }

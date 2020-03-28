@@ -8,6 +8,7 @@ import { CatalogosService } from 'src/app/servicios/catalogos.service';
 //Modelos 
 import { Region } from '../../../modelos/region';
 import { PuntosAtencion } from '../../../modelos/puntos-atencion';
+import { Usuarios } from '../../../modelos/usuarios'
 
 
 @Component({
@@ -31,6 +32,19 @@ export class ModificarComponent implements OnInit {
     nombre_region: ''
   }
   regiones: any = {}
+  countUsuarios: any = {}
+
+    usuario : Usuarios = {
+      dpi: 0,
+      nombre_usuario: '',
+      correo_usuario: '',
+      cargo_usuario: '',
+      region: 0,
+      id_puntosdeatencion: 0,
+      estado_usuario: 1,
+      fecha_creacion: new Date()
+      
+    }
 
   constructor(private catalogosService: CatalogosService, private router: Router) { }
 
@@ -68,14 +82,35 @@ export class ModificarComponent implements OnInit {
     this.puntoAtencion.nombre_puntodeatencion = nombre_puntodeatencion
   }
 
-  actualizar(nombre_puntodeatencion, estado_puntodeatencion){
+  async actualizar(nombre_puntodeatencion, estado_puntodeatencion){
     this.puntoAtencion.nombre_puntodeatencion = nombre_puntodeatencion.trim();
+    var totalUsuarios;
     if(estado_puntodeatencion == "Inactivo"){
       //Consulta a tabla usuarios para total de usuarios del punto de atencion
-      var totalUsuarios;
+      await this.catalogosService.contarUsuarios(this.puntoAtencion.id).toPromise().then(
+        res =>{
+          this.countUsuarios = res;
+          totalUsuarios = this.countUsuarios 
+          console.log(totalUsuarios)
+        }
+      ).catch(
+        err =>{
+          console.log(err)
+        }
+      )
       var confirmacionInactivar = confirm("Existen " + totalUsuarios + " cantidad de usuarios asociados al punto de atención, TODOS los usuarios serán automáticamente inactivados ¿Continua con el proceso de Inactivación del Punto de Atención?");
       if(confirmacionInactivar){
         //Proceder a inactivar usuarios
+        await this.catalogosService.inactivarUsuarios(this.puntoAtencion.id, this.usuario).toPromise().then(
+          res=>{
+            console.log(res)
+          }
+        ).catch(
+          err =>{
+            console.log(err);
+            alert("Error al inabilitar usuarios")
+          }
+        )
         this.puntoAtencion.estado_puntodeatencion = 0
       } else if(!confirmacionInactivar) {
         this.router.navigate(['/puntosatencion']);

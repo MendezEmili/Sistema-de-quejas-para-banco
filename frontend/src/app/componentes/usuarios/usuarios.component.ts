@@ -66,7 +66,7 @@ export class UsuariosComponent implements OnInit {
   
   guardar(){
    
-    var usuario = this.usuario.dpi=this.usuario.dpi;
+    this.usuario.dpi=this.usuario.dpi;
     this.usuario.nombre_usuario=this.usuario.nombre_usuario.trim();
     this.usuario.correo_usuario=this.usuario.correo_usuario.trim();
     this.usuario.cargo_usuario=this.usuario.cargo_usuario;
@@ -83,7 +83,8 @@ export class UsuariosComponent implements OnInit {
       },
       err =>{
         this.error = err;
-        console.log("Error: " + this.error.error)
+        console.log("Error: " + this.error.error);
+        alert(this.error.error)
       }
     )
 

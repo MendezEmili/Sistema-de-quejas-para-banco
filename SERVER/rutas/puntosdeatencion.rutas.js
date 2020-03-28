@@ -11,6 +11,6 @@ rutas.post('/insertar', puntosdeatencionCtrl.insertPuntosAtencion);
 rutas.put('/actualizar/:id', puntosdeatencionCtrl.actualizarPuntoAtencion);
 //Buscar por id
 rutas.get('/buscar/:id', puntosdeatencionCtrl.selectPuntoAtencionID);
-//Buscar por id
+//Buscar por id region
 rutas.get('/buscarregion/:region', puntosdeatencionCtrl.selectPuntoAtencionRegion);
 module.exports=rutas;

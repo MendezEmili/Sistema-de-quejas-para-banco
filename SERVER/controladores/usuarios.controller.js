@@ -70,6 +70,42 @@ usuariosCtrl.selectUsuariosdpi = async(req, res) =>{
   });   
 }
 
+usuariosCtrl.contarUsuariosPuntoAtencion = async(req, res) =>{
+  var id_puntosdeatencion = req.params.id
+  var sql = `select count(dpi) from usuarios WHERE id_puntosdeatencion=${id_puntosdeatencion}`;
+  await conexion.query(sql, (err, resultado)=>{
+    if (err){
+      console.log(err);
+      return res.json({
+        status: 500
+      })
+    } else {
+      console.log(resultado)
+      return res.json(resultado[0])
+    }
+  })
+}
+
+usuariosCtrl.inactivarUsuarios = async(req, res)=>{
+  var id_puntosdeatencion = req.params.id
+  var sql = `UPDATE usuarios SET estado_usuario=0 WHERE id_puntosdeatencion=${id_puntosdeatencion}`;
+
+  await conexion.query(sql, (err, resultado)=>{
+    if(err){
+      console.log(err);
+      return res.json({
+        status: 500,
+        mensaje: "No fue posible actualizar"
+      })
+    } else {
+      console.log("Datos actualizados");
+      return res.json({
+        status: 200,
+        mensaje: "Datos actualizados"
+      })
+    }
+  })
+}
 
   
 

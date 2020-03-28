@@ -9,4 +9,8 @@ rutas.get('/obtener', usuariosCtrl.selectUsuarios);
 rutas.post('/insertar', usuariosCtrl.insertUsuario);
 //Buscar por dpi
 rutas.get('/buscar/:dpi', usuariosCtrl.selectUsuariosdpi);
+//Contar cantidad de usuarios por punto de atencion
+rutas.get('/contar/:id', usuariosCtrl.contarUsuariosPuntoAtencion);
+//Inabilitar usuarios de un punto de atencion
+rutas.put('/inactivar/:id', usuariosCtrl.inactivarUsuarios);
 module.exports=rutas;
