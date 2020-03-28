@@ -28,6 +28,10 @@
                       </div>
 
                       <div class="form-group">
+                        <label for="exampleFormControlInput1">Contraseña: </label>
+                        <input type="password" class="form-control"  [(ngModel)]="usuario.password" name="password" id="exampleFormControlInput1" > <!---->
+                      </div>
+                      <div class="form-group">
                       <label for="exampleFormControlSelect1">Cargos:</label> <!--Tilde en region-->
                       <select class="form-control" [(ngModel)]="usuario.cargo_usuario" name="cargo_usuario" id="exampleFormControlSelect1" > <!---->
                         <option>Titular</option>
@@ -53,8 +57,7 @@
                               <option *ngFor="let puntoAtencion of puntosAtencion" data-toggle="modal" data-target="#exampleModal" (click)="establecerValores(puntoAtencion.id)">{{puntoAtencion.nombre_puntodeatencion}}</option>
                             </select>
                           </div>
-
-                     
+                       
                         <br>
                         <div class="form-group">
                         <div class="row">

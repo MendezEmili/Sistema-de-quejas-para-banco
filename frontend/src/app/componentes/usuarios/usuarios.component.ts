@@ -28,6 +28,7 @@ export class UsuariosComponent implements OnInit {
     region: 0,
     id_puntosdeatencion: 0,
     estado_usuario: 1,
+    password:'',
     fecha_creacion: new Date()
     
   }
@@ -74,7 +75,7 @@ export class UsuariosComponent implements OnInit {
     this.usuario.estado_usuario = 1;
     var fecha=Date.now();
     this.usuarios.fecha=this.usuarios.fecha_creacion;
- 
+    this.usuarios.password=this.usuarios.password;
     console.log(this.usuario)
     this.catalogosServices.postUsuarios(this.usuario).subscribe(
       res =>{
