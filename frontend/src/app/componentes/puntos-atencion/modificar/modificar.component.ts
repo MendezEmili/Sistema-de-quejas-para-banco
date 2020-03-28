@@ -42,7 +42,8 @@ export class ModificarComponent implements OnInit {
       region: 0,
       id_puntosdeatencion: 0,
       estado_usuario: 1,
-      fecha_creacion: new Date()
+      fecha_creacion: new Date(),
+      password: ''
       
     }
 
