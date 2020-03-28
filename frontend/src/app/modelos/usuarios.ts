@@ -6,6 +6,7 @@ export interface Usuarios {
     region: Number,
     id_puntosdeatencion:Number,
     cargo_usuario: String,
-    fecha_creacion: Date
+    fecha_creacion: Date,
+    password:string
   
 }

@@ -29,6 +29,7 @@ usuariosCtrl.insertUsuario=async (req, res)=>{
     var cargo_usuario= req.body.cargo_usuario;
     var id_puntosdeatencion=req.body.id_puntosdeatencion;
     var fecha_creacion= fecha.fecha();
+    var password=req.body.password;
 
     var usuario ={
     dpi,
@@ -38,7 +39,8 @@ usuariosCtrl.insertUsuario=async (req, res)=>{
     region,
     cargo_usuario,  
     id_puntosdeatencion,
-    fecha_creacion
+    fecha_creacion,
+    password
     }
     console.log(usuario)
     await conexion.query("INSERT INTO usuarios SET ?", usuario, (err, result) =>{
