@@ -79,7 +79,7 @@ export class UsuariosComponent implements OnInit {
     this.usuarios.fecha=this.usuarios.fecha_creacion;
     this.usuarios.password=this.usuarios.password;
     console.log(this.usuario)
-    this.catalogosServices.postUsuarios(this.usuario).subscribe(
+    /*this.catalogosServices.postUsuarios(this.usuario).subscribe(
       res =>{
         console.log(res)
         alert("Se guardo correctamente los datos del usuario" + this.usuario.nombre_usuario);
@@ -89,12 +89,12 @@ export class UsuariosComponent implements OnInit {
         console.log("Error: " + this.error.error);
         alert(this.error.error)
       }
-    )
-    /*this.catalogosServices.buscarUsuarioDPI(this.usuario.dpi).subscribe(
+    )*/
+    this.catalogosServices.buscarUsuarioDPI(this.usuario.dpi).subscribe(
       res=>{
         this.usuarioDPI = res; 
         if(this.usuarioDPI.length >0){
-          this.catalogosServices.buscarPuntoAtencionID(this.usuarioDPI.id_puntosdeatencion).subscribe(
+          this.catalogosServices.buscarPuntoAtencionID(this.usuarioDPI[0].id_puntosdeatencion).subscribe(
             res =>{
               this.nombre = res; 
               alert("Error al guardar datos, el usuario existe en el punto de atencion" + this.nombre.nombre_puntodeatencion)
@@ -122,7 +122,7 @@ export class UsuariosComponent implements OnInit {
         console.log(err)
         alert("Error al verificar usuario")
       }
-    )*/
+    )
 
   }
 
