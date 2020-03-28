@@ -71,7 +71,6 @@ export class UsuariosComponent implements OnInit {
     this.usuario.correo_usuario=this.usuario.correo_usuario.trim();
     this.usuario.cargo_usuario=this.usuario.cargo_usuario;
     this.usuario.region=this.usuario.region;
-    this.usuario.id_puntosdeatencion = 1; 
     this.usuario.estado_usuario = 1;
     var fecha=Date.now();
     this.usuarios.fecha=this.usuarios.fecha_creacion;
@@ -92,6 +91,7 @@ export class UsuariosComponent implements OnInit {
 
 
   buscar(id_region, nombre_region){
+    this.usuario.region = id_region;
     this.catalogosServices.buscarPuntoAtencionRegion(id_region).subscribe(
       res=>{
         this.puntosAtencion = res;
@@ -103,8 +103,7 @@ export class UsuariosComponent implements OnInit {
     )
     this.puntosAtencion.region_puntodeatencion = nombre_region
   }
-  establecerValores(id, nombre_puntodeatencion, estado_puntodeatencion){
-    this.puntosAtencion.id = id; 
-    this.puntosAtencion.nombre_puntodeatencion = nombre_puntodeatencion
+  establecerValores(id){
+    this.usuario.id_puntosdeatencion = id; 
   }
 }
