@@ -25,7 +25,8 @@ app.listen(app.get('port'), () =>{
 //Llamado de rutas
 app.use('/puntosdeatencion', require('./rutas/puntosdeatencion.rutas'));
 app.use('/region', require('./rutas/regiones.rutas'));
-app.use('/usuarios', require('./rutas/usuarios.rutas'))        
+app.use('/usuarios', require('./rutas/usuarios.rutas'));
+app.use('/auth', require('./rutas/auth.rutas'));        
 app.use('/', (req, res)=>{
     res.json({
         status: 'Sistema de Banco Mi Pistio'
