@@ -7,6 +7,7 @@ import { CatalogosService } from '../../servicios/catalogos.service';
 //Importar modelos 
 import { PuntosAtencion } from '../../modelos/puntos-atencion'
 import { Region } from '../../modelos/region';
+import { Usuarios } from '../../modelos/usuarios'
 
 @Component({
   selector: 'app-puntos-atencion',
@@ -32,6 +33,20 @@ export class PuntosAtencionComponent implements OnInit {
 
   regiones: any = []
   error: any; 
+  countUsuarios: any = {}
+
+  usuario : Usuarios = {
+    dpi: 0,
+    nombre_usuario: '',
+    correo_usuario: '',
+    cargo_usuario: '',
+    region: 0,
+    id_puntosdeatencion: 0,
+    estado_usuario: 1,
+    fecha_creacion: new Date(),
+    password: ''
+    
+  }
 
   constructor(private catalogosService: CatalogosService) { }
 
@@ -69,6 +84,74 @@ export class PuntosAtencionComponent implements OnInit {
     )
 
   }
+
+  buscar(id_region, nombre_region){
+    this.catalogosService.buscarPuntoAtencionRegion(id_region).subscribe(
+      res=>{
+        this.puntosAtencion = res;
+        console.log(res)
+      },
+      err =>{
+        console.log(err)
+      }
+    )
+    this.puntoAtencion.region_puntodeatencion = nombre_region
+  }
+
+  establecerValores(id, nombre_puntodeatencion){
+    this.puntoAtencion.id = id; 
+    this.puntoAtencion.nombre_puntodeatencion = nombre_puntodeatencion
+  }
+
+  async actualizar(nombre_puntodeatencion, estado_puntodeatencion){
+    this.puntoAtencion.nombre_puntodeatencion = nombre_puntodeatencion.trim();
+    var totalUsuarios;
+    if(estado_puntodeatencion == "Inactivo"){
+      //Consulta a tabla usuarios para total de usuarios del punto de atencion
+      await this.catalogosService.buscarUsuariosIdPA(this.puntoAtencion.id).toPromise().then(
+        res =>{
+          this.countUsuarios = res;
+          totalUsuarios = this.countUsuarios.length;
+          console.log(totalUsuarios)
+        }
+      ).catch(
+        err =>{
+          console.log(err)
+        }
+      )
+      var confirmacionInactivar = confirm("Existen " + totalUsuarios + " cantidad de usuarios asociados al punto de atención, TODOS los usuarios serán automáticamente inactivados ¿Continua con el proceso de Inactivación del Punto de Atención?");
+      if(confirmacionInactivar){
+        //Proceder a inactivar usuarios
+        await this.catalogosService.inactivarUsuarios(this.puntoAtencion.id, this.usuario).toPromise().then(
+          res=>{
+            console.log(res)
+          }
+        ).catch(
+          err =>{
+            console.log(err);
+            alert("Error al inabilitar usuarios")
+          }
+        )
+        this.puntoAtencion.estado_puntodeatencion = 0
+      } else if(!confirmacionInactivar) {
+        return 0;
+      }
+    } else {
+      this.puntoAtencion.estado_puntodeatencion = 1
+    }
+    this.catalogosService.actualizarPuntoAtencion(this.puntoAtencion.id, this.puntoAtencion).subscribe(
+      res =>{
+        console.log(res);
+        alert("Datos actualizados");
+        location.reload();
+      },
+      err =>{
+        console.log(err);
+        alert("Error al actualizar")
+      }
+    )
+  }
+
 
 
 }

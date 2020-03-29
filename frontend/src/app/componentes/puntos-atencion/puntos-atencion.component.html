@@ -28,7 +28,7 @@
                             <button type="button" class="btn btn-info" (click)="guardar();">Guardar</button>
                         </div>
                         <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
-                            <button type="button" class="btn btn-info" routerLink="/modificarpuntosatencion">Modificar</button>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modificarDatosModal">Modificar</button>
                         </div>
                         <div class="mt-2 col-8 col-sm-7 col-md-4 col-lg-3">
                             <button type="button" class="btn btn-info" (click)="resetForm(formularioPuntosAtencion);">Cancelar</button> <!---->
@@ -40,3 +40,52 @@
     </div>
 
 </div>
+
+<!--Inicio de modal-->
+<div class="modal fade" id="modificarDatosModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modificar Datos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="Puntos de atecion">Región</label>
+                <select multiple class="form-control" id="puntosdeatencion">
+                    <option *ngFor="let region of regiones" (click)="buscar(region.id_region, region.nombre_region)">{{region.id_region}}. {{region.nombre_region}}</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="exampleFormControlSelect2">Puntos de atención</label>
+                <select multiple class="form-control" id="exampleFormControlSelect2">
+                  <option *ngFor="let puntoAtencion of puntosAtencion" (click)="establecerValores(puntoAtencion.id, puntoAtencion.nombre_puntodeatencion)">{{puntoAtencion.nombre_puntodeatencion}}</option>
+                </select>
+              </div>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Nombre de Punto de Atención: </label>
+                  <div>
+                    <input [(ngModel)]="puntoAtencion.nombre_puntodeatencion" name="nombre_puntodeatencion">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="modificarPuntoAtencion">Estado de Punto de Atención</label>
+                  <select class="form-control" id="modificarPuntoAtencion" [(ngModel)]="puntoAtencion.estado_puntodeatencion" name="estado_puntodeatencion">
+                    <option>Activo</option>
+                    <option>Inactivo</option>
+                  </select>
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetForm(formularioPuntosAtencion)">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="actualizar(puntoAtencion.nombre_puntodeatencion, puntoAtencion.estado_puntodeatencion);">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Final de modal-->
