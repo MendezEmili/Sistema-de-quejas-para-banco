@@ -140,15 +140,18 @@ export class UsuariosComponent implements OnInit {
     )
     this.puntosAtencion.region_puntodeatencion = nombre_region
   }
-  establecerValores(id){
-    this.usuario.id_puntosdeatencion = id; 
+  establecerValores(dpi, correo, cargo, estado){
+    this.usuario.dpi = dpi;
+    this.usuario.correo_usuario = correo;
+    this.usuario.cargo_usuario = cargo;
+    this.usuario.estado_usuario = estado;
   }
 
  //ESTO ME HACE FALTA, NO SE SI ESTA BIEN PORQUE NO LOGRO
  //CONECTAR CON EL FRONTEND, o bueno lo hago mal jaja
  
 
- buscarPaUsuario(id_puntosdeatencion, nombre_usuario){
+ buscarPaUsuario(id_puntosdeatencion, nombre_puntodeatencion){
     this.usuario.nombre_usuario=id_puntosdeatencion;
     this.catalogosServices.buscarUsuariosIdPA(id_puntosdeatencion).subscribe(
       res =>{
@@ -159,10 +162,25 @@ export class UsuariosComponent implements OnInit {
         console.log(err)
       }
     )
-      this.puntosAtencion.region_puntodeatencion=nombre_usuario
+      this.puntosAtencion.region_puntodeatencion=nombre_puntodeatencion
   }
- establecerValores2(dpi){
-    this.usuario.id_puntosdeatencion = dpi; 
+
+  actualizar(estado){
+    if(estado == "Activo"){
+      this.usuario.estado_usuario = 1;
+    } else {
+      this.usuario.estado_usuario = 0;
+    }
+    this.catalogosServices.actualizarUsuarioDPI(this.usuario.dpi, this.usuario).subscribe(
+      res =>{
+        alert("Datos actualizados");
+        console.log(res)
+      },
+      err =>{
+        alert("Error al actualizar");
+        console.log(err)
+      }
+    )
   }
 
 

@@ -47,12 +47,8 @@ export class CatalogosService {
     return this.http.post(`${this.URL_API_US}insertar`,usuarios);
   }
 
-  contarUsuarios(id){
-    return this.http.get(`${this.URL_API_US}contar/${id}`);
-  }
-
   inactivarUsuarios(id, usuarios: Usuarios){
-    return this.http.put(`${this.URL_API_US}/inactivar/${id}`, usuarios);
+    return this.http.put(`${this.URL_API_US}inactivar/${id}`, usuarios);
   }
 
   buscarUsuarioDPI(dpi){
@@ -60,6 +56,10 @@ export class CatalogosService {
   }
 
   buscarUsuariosIdPA(id_puntosdeatencion){
-    return this.http.get(`${this.URL_API_US}/buscarpuntousuario/${id_puntosdeatencion}`)
+    return this.http.get(`${this.URL_API_US}buscarusuariopunto/${id_puntosdeatencion}`)
+  }
+
+  actualizarUsuarioDPI(dpi, usuarios: Usuarios){
+    return this.http.put(`${this.URL_API_US}actualizar/${dpi}`, usuarios);
   }
 }

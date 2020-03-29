@@ -78,7 +78,7 @@
 
 </div>
 
-
+<!--Modal para modificar datos-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -100,23 +100,23 @@
             <div class="form-group">
               <label for="exampleFormControlSelect2">Puntos de atención</label>
               <select multiple class="form-control" id="puntosdeatencion">
-                <option *ngFor="let puntoAtencion of puntosAtencion" data-toggle="" data-target="#exampleModal" (click)="establecerValores(puntoAtencion.id)">{{puntoAtencion.nombre_puntodeatencion}}</option>
+                <option *ngFor="let puntoAtencion of puntosAtencion" data-toggle="" data-target="#exampleModal" (click)="buscarPaUsuario(puntoAtencion.id, puntoAtencion.nombre_puntodeatencion)">{{puntoAtencion.nombre_puntodeatencion}}</option>
               </select>
             </div>
             <div class="form-group">
               <label for="exampleFormControlSelect2">Usuarios</label>
               <select multiple class="form-control" id="puntosdeatencion">
-                <option *ngFor="let puntoAtencion of puntosAtencion" data-toggle="" data-target="#exampleModal" (click)="establecerValores2(puntoAtencion.id)">{{usuario.nombre_usuario}}</option>
+                <option *ngFor="let usuario of usuarios" data-toggle="" data-target="#exampleModal" (click)="establecerValores(usuario.dpi, usuario.correo_usuario, usuario.cargo_usuario, usuario.estado_usuario)">{{usuario.nombre_usuario}}</option>
               </select>
             </div>
             <div class="form-group">
               <label for="exampleFormControlSelect1">Correo </label>
               <div>
-                <input type="email" [(ngModel)]="puntoAtencion.nombre_puntodeatencion" name="nombre_puntodeatencion">
+                <input type="email" [(ngModel)]="usuario.correo_usuario" name="correo_usuario">
               </div>
             </div>
             <div class="form-group">
-              <label for="exampleFormControlSelect1">Cargos:</label> <!--Tilde en region-->
+              <label for="exampleFormControlSelect1">Cargos:</label>
               <select class="form-control" [(ngModel)]="usuario.cargo_usuario" name="cargo_usuario" id="exampleFormControlSelect1" > <!---->
                 <option>Titular</option>
                 <option>Suplente</option>
@@ -128,7 +128,7 @@
                  </div>
               <div class="form-group">
                 <label for="modificarPuntoAtencion">Estado</label>
-                <select class="form-control" id="modificarPuntoAtencion" [(ngModel)]="puntoAtencion.estado_puntodeatencion" name="estado_puntodeatencion">
+                <select class="form-control" id="modificarPuntoAtencion" [(ngModel)]="usuario.estado_usuario" name="estado_usuario">
                   <option>Activo</option>
                   <option>Inactivo</option>
                 </select>
@@ -136,8 +136,8 @@
             </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" routerLink="/puntosatencion">Cancelar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetForm(formularioUsuarios);">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="actualizar(usuario.estado_usuario)">Guardar</button>
       </div>
     </div>
   </div>

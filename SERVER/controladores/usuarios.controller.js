@@ -72,21 +72,6 @@ usuariosCtrl.selectUsuariosdpi = async(req, res) =>{
   });   
 }
 
-usuariosCtrl.contarUsuariosPuntoAtencion = async(req, res) =>{
-  var id_puntosdeatencion = req.params.id
-  var sql = `select * from usuarios WHERE id_puntosdeatencion=${id_puntosdeatencion}`;
-  await conexion.query(sql, (err, resultado)=>{
-    if (err){
-      console.log(err);
-      return res.json({
-        status: 500
-      })
-    } else {
-      console.log(resultado)
-      return res.json(resultado)
-    }
-  })
-}
 
 usuariosCtrl.inactivarUsuarios = async(req, res)=>{
   var id_puntosdeatencion = req.params.id
@@ -126,8 +111,22 @@ usuariosCtrl.selectUsuarioPA = async (req , res)=>{
 
 
 usuariosCtrl.editarUsuario = async(req, res)=>{
-  
+  var dpi = req.params.dpi; 
+  var correo_usuario = req.body.correo_usuario;
+  var cargo_usuario = req.body.cargo_usuario;
+  var estado_usuario = req.body.estado_usuario;
+  var sql = `UPDATE usuarios SET correo_usuario="${correo_usuario}", cargo_usuario="${cargo_usuario}", estado_usuario=${estado_usuario} WHERE dpi=${dpi}`
 
+  await conexion.query(sql, (err, resultado)=>{
+    if(err){
+      return res.status(500).send("No fue posible actualizar")
+    } else {
+      return res.json({
+        status: 200,
+        mensaje: "Datos actualizados"
+      })
+    }
+  })
 }
 
   

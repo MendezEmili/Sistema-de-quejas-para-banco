@@ -89,7 +89,7 @@ export class ModificarComponent implements OnInit {
     var totalUsuarios;
     if(estado_puntodeatencion == "Inactivo"){
       //Consulta a tabla usuarios para total de usuarios del punto de atencion
-      await this.catalogosService.contarUsuarios(this.puntoAtencion.id).toPromise().then(
+      await this.catalogosService.buscarUsuariosIdPA(this.puntoAtencion.id).toPromise().then(
         res =>{
           this.countUsuarios = res;
           totalUsuarios = this.countUsuarios.length;
