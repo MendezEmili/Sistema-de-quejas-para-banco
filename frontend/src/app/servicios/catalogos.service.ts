@@ -58,4 +58,8 @@ export class CatalogosService {
   buscarUsuarioDPI(dpi){
     return this.http.get(`${this.URL_API_US}buscar/${dpi}`)
   }
+
+  buscarUsuariosIdPA(id_puntosdeatencion){
+    return this.http.get(`${this.URL_API_US}/buscarpuntousuario/${id_puntosdeatencion}`)
+  }
 }

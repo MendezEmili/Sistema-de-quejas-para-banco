@@ -109,6 +109,21 @@ usuariosCtrl.inactivarUsuarios = async(req, res)=>{
   })
 }
 
+usuariosCtrl.selectUsuarioPA = async (req , res)=>{
+  var id_puntosdeatencion= req.params.id_puntosdeatencion;
+  var sql= `SELECT * FROM usuarios WHERE id_puntosdeatencion=${id_puntosdeatencion}`;
+  await conexion.query(sql, (err, resultado)=>{
+    if (err){
+      console.log(err)
+      return res.status(500).send("Error en Consulta");
+    }else{
+      console.log(resultado);
+      return res.json(resultado)
+    }
+  })
+}
+
+
 
 usuariosCtrl.editarUsuario = async(req, res)=>{
   
