@@ -144,5 +144,26 @@ export class UsuariosComponent implements OnInit {
     this.usuario.id_puntosdeatencion = id; 
   }
 
+ //ESTO ME HACE FALTA, NO SE SI ESTA BIEN PORQUE NO LOGRO
+ //CONECTAR CON EL FRONTEND, o bueno lo hago mal jaja
+ 
+
+ buscarPaUsuario(id_puntosdeatencion, nombre_usuario){
+    this.usuario.nombre_usuario=id_puntosdeatencion;
+    this.catalogosServices.buscarUsuariosIdPA(id_puntosdeatencion).subscribe(
+      res =>{
+        this.usuarios=res;
+        console.log(res)
+      },
+      err=>{
+        console.log(err)
+      }
+    )
+      this.puntosAtencion.region_puntodeatencion=nombre_usuario
+  }
+ establecerValores2(dpi){
+    this.usuario.id_puntosdeatencion = dpi; 
+  }
+
 
 }
