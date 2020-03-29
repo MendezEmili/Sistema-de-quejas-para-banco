@@ -140,7 +140,12 @@ export class UsuariosComponent implements OnInit {
     )
     this.puntosAtencion.region_puntodeatencion = nombre_region
   }
-  establecerValores(dpi, correo, cargo, estado){
+
+  establecerValores(id){
+    this.puntoAtencion.id = id;
+  }
+
+  establecerValores2(dpi, correo, cargo, estado){
     this.usuario.dpi = dpi;
     this.usuario.correo_usuario = correo;
     this.usuario.cargo_usuario = cargo;
