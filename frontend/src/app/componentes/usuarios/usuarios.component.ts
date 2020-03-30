@@ -108,7 +108,8 @@ export class UsuariosComponent implements OnInit {
           this.catalogosServices.postUsuarios(this.usuario).subscribe(
             res =>{
               console.log(res)
-              alert("Se guardo correctamente los datos del usuario" + this.usuario.nombre_usuario);
+              alert("Se guardo correctamente los datos del usuario para el punto de atencion" );
+              location.reload();
             },
             err =>{
               this.error = err;
@@ -143,6 +144,7 @@ export class UsuariosComponent implements OnInit {
 
   establecerValores(id){
     this.puntoAtencion.id = id;
+    this.usuario.id_puntosdeatencion = id;
   }
 
   establecerValores2(dpi, correo, cargo, estado){
@@ -178,8 +180,9 @@ export class UsuariosComponent implements OnInit {
     }
     this.catalogosServices.actualizarUsuarioDPI(this.usuario.dpi, this.usuario).subscribe(
       res =>{
-        alert("Datos actualizados");
+        alert("Se modificaron correctamente los datos del usuario del punto de atencion");
         console.log(res)
+        location.reload();
       },
       err =>{
         alert("Error al actualizar");

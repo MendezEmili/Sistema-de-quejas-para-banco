@@ -62,4 +62,17 @@ export class CatalogosService {
   actualizarUsuarioDPI(dpi, usuarios: Usuarios){
     return this.http.put(`${this.URL_API_US}actualizar/${dpi}`, usuarios);
   }
+
+  //Validacion de usuario 
+  setToken(token){
+    localStorage.setItem("accessToken", token);
+  }
+
+  getToken(){
+    return localStorage.getItem("accessToken");
+  }
+
+  logout(){
+    localStorage.removeItem("accessToken");
+  }
 }

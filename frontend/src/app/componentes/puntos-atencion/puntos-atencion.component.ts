@@ -8,6 +8,7 @@ import { CatalogosService } from '../../servicios/catalogos.service';
 import { PuntosAtencion } from '../../modelos/puntos-atencion'
 import { Region } from '../../modelos/region';
 import { Usuarios } from '../../modelos/usuarios'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-puntos-atencion',
@@ -15,6 +16,8 @@ import { Usuarios } from '../../modelos/usuarios'
   styleUrls: ['./puntos-atencion.component.css']
 })
 export class PuntosAtencionComponent implements OnInit {
+  token: any;
+  autorizacion: boolean;
 
   puntoAtencion: PuntosAtencion = {
     id: 0,
@@ -48,18 +51,25 @@ export class PuntosAtencionComponent implements OnInit {
     
   }
 
-  constructor(private catalogosService: CatalogosService) { }
+  constructor(private catalogosService: CatalogosService, private ruta: Router) { }
 
   ngOnInit(): void {
-    this.catalogosService.getRegiones().subscribe(
-      res =>{
-        this.regiones = res;
-        console.log(this.regiones)
-      },
-      err =>{
-        console.log(err)
-      }
-    )
+    this.autorizacion = false;
+    this.token = this.catalogosService.getToken();
+    if(this.token != null){
+      this.autorizacion = true;
+      this.catalogosService.getRegiones().subscribe(
+        res =>{
+          this.regiones = res;
+          console.log(this.regiones)
+        },
+        err =>{
+          console.log(err)
+        }
+      )
+    } else {
+      this.ruta.navigate(['/inicio'])
+    }
   }
 
   resetForm(form?: NgForm){
@@ -134,7 +144,7 @@ export class PuntosAtencionComponent implements OnInit {
         )
         this.puntoAtencion.estado_puntodeatencion = 0
       } else if(!confirmacionInactivar) {
-        return 0;
+        location.reload();
       }
     } else {
       this.puntoAtencion.estado_puntodeatencion = 1

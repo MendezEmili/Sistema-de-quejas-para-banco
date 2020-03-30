@@ -11,13 +11,13 @@
         <a class="nav-link"  routerLink="/inicio"><span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/usuarios">Usuarios</a>
+        <a class="nav-link" *ngIf="autorizacion" routerLink="/usuarios">Usuarios</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link"  routerLink="/puntosatencion">Puntos de atención</a>
+        <a class="nav-link"  *ngIf="autorizacion" routerLink="/puntosatencion">Puntos de atención</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" *ngIf="autorizacion" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Queja
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -28,12 +28,15 @@
       </li>
      
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <form *ngIf="!autorizacion" class="form-inline my-2 my-lg-0">
       <a class="nav-link disabled" href="#">Iniciar Sesion</a>
       <input class="form-control mr-sm-2" type="email" placeholder="Correo" aria-label="Usuario">
       <input class="form-control mr-sm-2" type="password" placeholder="Contraseña" aria-label="Contraseña">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Iniciar</button>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="login();">Iniciar</button>
     </form>
+    <div>
+      <button *ngIf="autorizacion" class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="logout();">Cerrar Sesión</button>
+    </div>
   </div>
 </nav>
 <!-- Page Content -->

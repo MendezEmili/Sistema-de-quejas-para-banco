@@ -90,7 +90,7 @@ puntoAtencionCtrl.selectPuntoAtencionID = async(req, res) =>{
 
 puntoAtencionCtrl.selectPuntoAtencionRegion = async(req, res) =>{
   var region = req.params.region;
-  var sql = `select * from puntosdeatencion WHERE region_puntodeatencion=${region}`;
+  var sql = `select * from puntosdeatencion WHERE region_puntodeatencion=${region} and estado_puntodeatencion=1`;
   await conexion.query(sql, (err, resultado)=> {
     if (err) {
       console.log(err)
