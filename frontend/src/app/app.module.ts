@@ -10,6 +10,7 @@ import { PuntosAtencionComponent } from './componentes/puntos-atencion/puntos-at
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { FooterComponent } from './componentes/footer/footer.component';
+import { TipoQuejaComponent } from './componentes/tipo-queja/tipo-queja.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FooterComponent } from './componentes/footer/footer.component';
     PuntosAtencionComponent,
     InicioComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    TipoQuejaComponent
   ],
   imports: [
     BrowserModule,
