@@ -1,0 +1,82 @@
+<div *ngIf="autorizacion" class="container mt-4 pt-4">
+
+    <div>
+        <h2 class="text-center">Queja</h2> <!--Tilde en atencion-->
+        <hr class="bg-success">
+    </div>
+    <div class="row">
+        <div class="col-1 col-sm-2 col-md-3">
+
+        </div>
+        <div *ngIf="!ingresoQueja" class="col-10 col-sm-8 col-md-6">
+          <div class="form-group">
+            <div class="mt-4 mb-4">
+              <button type="button" class="btn btn-success btn-lg btn-block" (click)="ingresarQueja();">Nueva queja</button>
+            </div>
+            <div class="mt-4">
+              <button type="button" class="btn btn-success btn-lg btn-block" routerLink="/home" >Salir</button> <!---->
+            </div>
+        </div>
+        </div>
+        <div *ngIf="ingresoQueja" class="col-10 col-sm-8 col-md-6">
+            <form #formularioQueja = "ngForm">
+                
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Medio de ingreso*</label> <!--Tilde en region-->
+                    <select class="form-control" id="exampleFormControlSelect1" > <!---->
+                      <option>1. </option>
+                      <option>2. </option>
+                    </select>
+                  </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Nombre*: </label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" > <!---->
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Correo electrónico*: </label>
+                  <input type="email" class="form-control" id="exampleFormControlInput1" > <!---->
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Teléfono*: </label>
+                  <input type="number" class="form-control" id="exampleFormControlInput1" > <!---->
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Oficina*: </label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" > <!---->
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Nombre de empleado: </label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" > <!---->
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Detalle de la queja*: </label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" > <!---->
+                  <div class="center mt-2 mb-2">
+                    <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+                    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                          Desea adjuntar algún archivo que respalde su queja. 
+                          <button type="button" (click)="openFileSelector()">Seleccionar archivo</button>
+                        </ng-template>
+                    </ngx-file-drop>
+                </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                            <button type="button" class="btn btn-success" (click)="guardar();">Guardar</button>
+                        </div>
+                        <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                            <button type="button" class="btn btn-success" (click)="resetForm(formularioQueja);">Cancelar</button>
+                        </div>
+                        <div class="mt-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                            <button type="button" class="btn btn-success" (click)="salir();">Salir</button> <!---->
+                        </div>
+                    </div>
+                </div>
+              </form>
+        </div>
+    </div>
+
+
+

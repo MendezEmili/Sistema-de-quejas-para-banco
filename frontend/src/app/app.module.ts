@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
+import { NgxFileDropModule} from 'ngx-file-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { InicioComponent } from './componentes/inicio/inicio.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { TipoQuejaComponent } from './componentes/tipo-queja/tipo-queja.component';
+import { QuejaComponent } from './componentes/queja/queja.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,15 @@ import { TipoQuejaComponent } from './componentes/tipo-queja/tipo-queja.componen
     InicioComponent,
     HomeComponent,
     FooterComponent,
-    TipoQuejaComponent
+    TipoQuejaComponent,
+    QuejaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxFileDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,6 +5,7 @@ import { HomeComponent } from './componentes/home/home.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { PuntosAtencionComponent } from './componentes/puntos-atencion/puntos-atencion.component';
 import { TipoQuejaComponent } from './componentes/tipo-queja/tipo-queja.component';
+import { QuejaComponent } from './componentes/queja/queja.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'tipoqueja',
     component: TipoQuejaComponent
+  },
+  {
+    path: 'queja',
+    component: QuejaComponent
   }
 ];
 
