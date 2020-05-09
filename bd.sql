@@ -14,14 +14,28 @@ create table usuarios(
     estado_usuario varchar (40) not null,
     region varchar (50) NOT null,
     id_puntosdeatencion int (20) not null,
-    FOREING KEY (id_puntosdeatencion) REFERENCES puntosdeatencion (id)
+    FOREIGN KEY (id_puntosdeatencion) REFERENCES puntosdeatencion (id)
     
     );
     
 
 CREATE table tiposqueja( siglas varchar (10) not null PRIMARY KEY, descripcion_tq varchar (100) not null, estado_tq int (2) not null, fecha_queja DATE not null );
 
-create table medios_ingreso
+create table medios_ingreso_queja(
+   id_medio_ingreso_queja int primary key AUTO_INCREMENT,
+   descripcion_medio varchar (20) not null
+)
+
+create table estados_externos(
+   id_estado_externo int primary key AUTO_INCREMENT,
+   estado varchar (15) not null
+)
+
+create table estados_internos(
+   id_estado_interno int primary key AUTO_INCREMENT,
+   estado_i varchar (15) not null
+)
+
 
 CREATE table queja(
    id_queja int primary key AUTO_INCREMENT,
@@ -29,7 +43,7 @@ CREATE table queja(
    nombre varchar (50) not null,
    correo varchar (50) not null,
    telefono int (13) not null, 
-   oficina int (8) not null, 
+   oficina int (11) not null, 
    dpi_empleado Bigint (15),
    detalle_queja varchar (1000) not null, 
    archivo longblob,
@@ -38,8 +52,14 @@ CREATE table queja(
    fecha_ingreso timestamp not null,
    tipo_queja varchar(10) not null,
    ingreso_queja varchar (20) not null, 
-   resultado varchar (50) not null,
-   justificacion varchar(1000) not null,
+   resultado varchar (50),
+   justificacion varchar(1000),
+   FOREIGN key (medio_ingreso_queja) REFERENCES medios_ingreso_queja(id_medio_ingreso_queja),
+   FOREIGN key (oficina) REFERENCES puntosdeatencion(id),
+   FOREIGN key (dpi_empleado) REFERENCES usuarios(dpi),
+   FOREIGN KEY (tipo_queja) REFERENCES tiposqueja(siglas),
+   FOREIGN KEY (estado_externo) REFERENCES estados_externos (id_estado_externo),
+   FOREIGN KEY (estado_interno) REFERENCES estados_internos (id_estado_interno)
 )
 
  var sql="CREATE TABLE rol( id_rol int AUTO_INCREMENT PRIMARY key, tipo_rol varchar (30)) not null";

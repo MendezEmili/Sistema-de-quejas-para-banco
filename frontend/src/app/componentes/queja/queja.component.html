@@ -55,8 +55,17 @@
                     <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
                     (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
                         <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-                          Desea adjuntar algún archivo que respalde su queja. 
-                          <button type="button" (click)="openFileSelector()">Seleccionar archivo</button>
+                          <div class="row ml-2">
+                            <div class="text-success col">
+                              Desea adjuntar algún archivo que respalde su queja. 
+                            </div>
+                            <div class="col">
+                              <button type="button" class="btn btn-secondary" (click)="openFileSelector()">Seleccionar archivo</button>
+                              <tr *ngFor="let item of files; let i=index">
+                                <td class="text-success"><strong>{{ item.relativePath }}</strong></td>
+                            </tr>
+                            </div>
+                          </div>
                         </ng-template>
                     </ngx-file-drop>
                 </div>
