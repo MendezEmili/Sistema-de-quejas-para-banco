@@ -30,8 +30,8 @@
     </ul>
     <form *ngIf="!autorizacion" class="form-inline my-2 my-lg-0">
       <a class="nav-link disabled" href="#">Iniciar Sesion</a>
-      <input class="form-control mr-sm-2" type="email" placeholder="Correo" aria-label="Usuario">
-      <input class="form-control mr-sm-2" type="password" placeholder="Contraseña" aria-label="Contraseña">
+      <input class="form-control mr-sm-2"  [(ngModel)]="usuario.correo_usuario"  name="correo_usuario" type="email" placeholder="Correo" aria-label="Usuario">
+      <input class="form-control mr-sm-2"  [(ngModel)]="usuario.password"  name="password" type="password" placeholder="Contraseña" aria-label="Contraseña">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="login();">Iniciar</button>
     </form>
     <div>
