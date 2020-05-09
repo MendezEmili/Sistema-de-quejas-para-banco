@@ -13,8 +13,9 @@ export class CatalogosService {
 
   URL_API_PA = this.baseURL + 'puntosdeatencion/';
   URL_API_R = this.baseURL + 'region/';
-  URL_API_US= this.baseURL + 'usuarios/'
-  URL_API_TQ= this.baseURL + 'tipoqueja/'
+  URL_API_US= this.baseURL + 'usuarios/';
+  URL_API_TQ= this.baseURL + 'tipoqueja/';
+  URL_API_LG= this.baseURL + 'auth/';
 
   constructor(private http: HttpClient) { }
 
@@ -69,11 +70,13 @@ export class CatalogosService {
   setToken(token){
     localStorage.setItem("accessToken", token);
   }
-
+  
   getToken(){
     return localStorage.getItem("accessToken");
   }
-
+  login(correo_usuario, password){
+    return this.http.get(`${this.URL_API_LG}login/${correo_usuario}/${password}`);
+  }
   logout(){
     localStorage.removeItem("accessToken");
   }
