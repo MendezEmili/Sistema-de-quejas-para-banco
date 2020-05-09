@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { PuntosAtencion } from '../modelos/puntos-atencion';
 import { Usuarios } from '../modelos/usuarios';
 import { TipoQueja } from '../modelos/tipo-queja';
+import { Queja } from '../modelos/queja';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,8 @@ export class CatalogosService {
   URL_API_US= this.baseURL + 'usuarios/';
   URL_API_TQ= this.baseURL + 'tipoqueja/';
   URL_API_LG= this.baseURL + 'auth/';
+  URL_API_DQ= this.baseURL + 'detallequeja/';
+  URL_API_Q = this.baseURL + 'queja/'
 
   constructor(private http: HttpClient) { }
 
@@ -34,6 +37,10 @@ export class CatalogosService {
 
   actualizarPuntoAtencion(id, puntoAtencion: PuntosAtencion){
     return this.http.put(`${this.URL_API_PA}actualizar/${id}`, puntoAtencion);
+  }
+
+  obtenerPuntosAtencion(){
+    return this.http.get(`${this.URL_API_PA}obtener`);
   }
 
   //Regiones 
@@ -98,4 +105,22 @@ export class CatalogosService {
     return this.http.put(`${this.URL_API_TQ}actualizar/${siglas}`, tipoQueja)
   }
 
+  //Detalles de queja 
+  //Estado externo
+  obtenerEstadoExterno(){
+    return this.http.get(`${this.URL_API_DQ}conseguiree`);
+  }
+  //Estado interno 
+  obtenerEstadoInterno(){
+    return this.http.get(`${this.URL_API_DQ}conseguirei`);
+  }
+  //Medios de ingreso
+  obtenerMediosIngreso(){
+    return this.http.get(`${this.URL_API_DQ}conseguirmi`);
+  }
+
+  //Queja 
+  insertarQueja(queja: Queja){
+    return this.http.post(`${this.URL_API_Q}insertar`, queja);
+  }
 }

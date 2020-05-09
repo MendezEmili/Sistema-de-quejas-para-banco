@@ -11,5 +11,7 @@ rutas.post('/insertaree', detalleQuejaCtrl.insertEstadoExterno);
 //Estado interno
 rutas.get('/conseguirei', detalleQuejaCtrl.getEstadosInternos);
 rutas.post('/insertarei', detalleQuejaCtrl.insertEstadoInterno);
-//Me
+//Medios de ingreso 
+rutas.get('/conseguirmi', detalleQuejaCtrl.getMedioIngreso);
+rutas.post('/insertarmi', detalleQuejaCtrl.insertMedioIngreso);
 module.exports = rutas; 

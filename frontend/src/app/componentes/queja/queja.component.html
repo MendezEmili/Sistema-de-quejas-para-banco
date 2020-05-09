@@ -23,34 +23,37 @@
                 
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Medio de ingreso*</label> <!--Tilde en region-->
-                    <select class="form-control" id="exampleFormControlSelect1" > <!---->
-                      <option>1. </option>
-                      <option>2. </option>
+                    <select class="form-control" [(ngModel)]="queja.medio_ingreso_queja" name="medio_ingreso_queja" id="exampleFormControlSelect1" > <!---->
+                      <option> </option>
+                      <option *ngFor="let medioIngreso of mediosIngreso" (click)="establecerValores(medioIngreso.id_medio_ingreso_queja);">{{medioIngreso.id_medio_ingreso_queja}}. {{medioIngreso.descripcion_medio}} </option>
                     </select>
                   </div>
                 <div class="form-group">
-                  <label for="exampleFormControlInput1">Nombre*: </label>
+                  <label for="exampleFormControlInput1" >Nombre*: </label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" [(ngModel)]="queja.nombre" name="nombre"> <!---->
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput2">Correo electrónico*: </label>
+                  <input type="email" class="form-control" id="exampleFormControlInput2" [(ngModel)]="queja.correo" name="correo"> <!---->
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput3">Teléfono*: </label>
+                  <input type="number" class="form-control" id="exampleFormControl" [(ngModel)]="queja.telefono" name="telefono" > <!---->
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput4">Oficina*: </label>
+                  <select class="form-control" id="exampleFormControlSelect2" [(ngModel)]="queja.oficina" name="oficina"> <!---->
+                    <option> </option>
+                    <option *ngFor="let puntoAtencion of puntosAtencion" (click)="establecerValor(puntoAtencion.id);">{{puntoAtencion.nombre_puntodeatencion}} </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput5">Nombre de empleado: </label>
                   <input type="text" class="form-control" id="exampleFormControlInput1" > <!---->
                 </div>
                 <div class="form-group">
-                  <label for="exampleFormControlInput1">Correo electrónico*: </label>
-                  <input type="email" class="form-control" id="exampleFormControlInput1" > <!---->
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Teléfono*: </label>
-                  <input type="number" class="form-control" id="exampleFormControlInput1" > <!---->
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Oficina*: </label>
-                  <input type="text" class="form-control" id="exampleFormControlInput1" > <!---->
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Nombre de empleado: </label>
-                  <input type="text" class="form-control" id="exampleFormControlInput1" > <!---->
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Detalle de la queja*: </label>
-                  <input type="text" class="form-control" id="exampleFormControlInput1" > <!---->
+                  <label for="exampleFormControlInput6">Detalle de la queja*: </label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" [(ngModel)]="queja.detalle_queja" name="detalle_queja" > <!---->
                   <div class="center mt-2 mb-2">
                     <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
                     (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">

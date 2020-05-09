@@ -7,4 +7,10 @@ export interface Queja {
     oficina: Number;
     nombre_empleado: Number; 
     detalle_queja: String;
+    estado_externo: Number;
+    estado_interno: Number;
+    tipo_queja: String;
+    ingreso_queja: String;
+    resultado?: String;
+    justificacion?: String;
 }

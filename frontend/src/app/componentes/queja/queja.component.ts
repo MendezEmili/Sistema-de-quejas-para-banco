@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 
+import { MedioIngreso } from '../../modelos/medio-ingreso';
+import { PuntosAtencion } from '../../modelos/puntos-atencion';
+import { Queja } from '../../modelos/queja';
+import { CatalogosService } from 'src/app/servicios/catalogos.service';
+
 @Component({
   selector: 'app-queja',
   templateUrl: './queja.component.html',
@@ -11,8 +16,40 @@ export class QuejaComponent implements OnInit {
 
   autorizacion: boolean;
   ingresoQueja: boolean;
+  error: any;
 
-  constructor() { }
+  medioIngreso: MedioIngreso = {
+    id_medio_ingreso_queja: 0,
+    descripcion_medio: ''
+  }
+  mediosIngreso: any = [];
+
+  puntoAtencion: PuntosAtencion ={
+    id: 0,
+    nombre_puntodeatencion: '',
+    estado_puntodeatencion: 0,
+    region_puntodeatencion: ''
+  }
+  puntosAtencion: any = [];
+
+  queja: Queja ={
+    id_queja: 0,
+    medio_ingreso_queja: 0,
+    nombre: '',
+    correo: '',
+    telefono: 0,
+    oficina: 0,
+    nombre_empleado: 0,
+    detalle_queja: '',
+    ingreso_queja: '',
+    estado_externo: 0,
+    estado_interno: 0,
+    tipo_queja: '',
+    resultado: ''
+  }
+  quejas: any = []
+
+  constructor(private catalogosService: CatalogosService) { }
 
   ngOnInit(): void {
     this.autorizacion = true;
@@ -23,8 +60,12 @@ export class QuejaComponent implements OnInit {
 
   }
 
-  establecerValores(){
+  establecerValores(id_medio_ingreso_queja){
+    this.queja.medio_ingreso_queja = id_medio_ingreso_queja;
+  }
 
+  establecerValor(id){
+    this.queja.oficina = id;
   }
 
   buscar(){
@@ -32,11 +73,52 @@ export class QuejaComponent implements OnInit {
   }
 
   guardar(){
-    location.reload();
+    this.queja.estado_externo = 1;
+    this.queja.estado_interno = 1;
+    this.queja.tipo_queja = "QMS";
+    if(this.autorizacion){
+      this.queja.ingreso_queja = "Menú aplicación";
+      this.queja.resultado = "Ingresada exitosamente su queja";
+    } else {
+      this.queja.ingreso_queja = "Portal";
+      this.queja.resultado = "Ingresada exitosamente a través de la aplicación movil"
+    }
+    
+    this.catalogosService.insertarQueja(this.queja).subscribe(
+      res =>{
+        console.log(res)
+        alert(this.queja.resultado);
+        location.reload();
+      }, 
+      err =>{
+        this.error = err;
+        console.log(err);
+        alert(this.error.error)
+      }
+    )
   }
 
   ingresarQueja(){
     this.ingresoQueja = true;
+
+    this.catalogosService.obtenerMediosIngreso().subscribe(
+      res =>{
+        this.mediosIngreso = res;
+      }, 
+      err =>{
+        this.error = err; 
+        alert(this.error.error);
+      }
+    )
+    this.catalogosService.obtenerPuntosAtencion().subscribe(
+      res =>{
+        this.puntosAtencion = res;
+      },
+      err =>{
+        this.error = err;
+        alert(this.error.error)
+      }
+    )
   }
 
   resetForm(form?: NgForm){
