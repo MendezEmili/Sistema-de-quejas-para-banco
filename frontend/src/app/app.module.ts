@@ -13,6 +13,8 @@ import { HomeComponent } from './componentes/home/home.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { TipoQuejaComponent } from './componentes/tipo-queja/tipo-queja.component';
 import { QuejaComponent } from './componentes/queja/queja.component';
+import { AutoconsultaComponent } from './componentes/autoconsulta/autoconsulta.component';
+import { QuejasIgresadasComponent } from './componentes/quejas-igresadas/quejas-igresadas.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { QuejaComponent } from './componentes/queja/queja.component';
     HomeComponent,
     FooterComponent,
     TipoQuejaComponent,
-    QuejaComponent
+    QuejaComponent,
+    AutoconsultaComponent,
+    QuejasIgresadasComponent
   ],
   imports: [
     BrowserModule,

@@ -38,7 +38,7 @@ quejaCtrl.insertarQueja = async(req, res)=>{
         resultado,
         justificacion
     }
-
+    console.log(queja)
     await conexion.query("INSERT INTO queja SET ?", queja, (err, resultado)=>{
         if (err) {
             console.log("No fue posible insertar")
@@ -53,5 +53,23 @@ quejaCtrl.insertarQueja = async(req, res)=>{
     });
 }
 
+
+quejaCtrl.autoconsulta = async(req, res)=>{
+  var tipo_queja = req.params.tipo_queja;
+  var id_queja = req.params.id_queja;
+  var fecha = req.params.fecha;
+
+  var sql = `SELECT q.estado_externo, q.resultado, e.estado FROM queja q INNER JOIN estados_externos e ON q.estado_externo = e.id_estado_externo WHERE tipo_queja = "${tipo_queja}" AND id_queja=${id_queja} AND YEAR(fecha_ingreso) = ${fecha}`;
+
+  await conexion.query(sql, (err, resultado)=>{
+    if(err){
+      return res.status(400).send("Error al realizar la búsqueda");
+    } else if(resultado[0]==null){
+      return res.status(404).send("El número de la queja no existe, verifique si ingresó el número correcto.")
+    } else{
+      return res.json(resultado);
+    }
+  })
+}
 
 module.exports = quejaCtrl;

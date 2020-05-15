@@ -11,18 +11,19 @@
         <a class="nav-link"  routerLink="/inicio"><span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" *ngIf="autorizacion" routerLink="/usuarios">Usuarios</a>
+        <a class="nav-link" *ngIf="pUsuarios" routerLink="/usuarios">Usuarios</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link"  *ngIf="autorizacion" routerLink="/puntosatencion">Puntos de atención</a>
+        <a class="nav-link"  *ngIf="pPuntosAtencion" routerLink="/puntosatencion">Puntos de atención</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" *ngIf="autorizacion" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Queja
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" routerLink="/tipoqueja">Tipos de queja</a>
+          <a class="dropdown-item" *ngIf="pTipoQueja" routerLink="/tipoqueja">Tipos de queja</a>
           <a class="dropdown-item" routerLink="/queja">Ingresar Queja</a>
+          <a class="dropdown-item" routerLink="/autoconsulta">Consultar Estado de Queja</a>
   
         </div>
       </li>

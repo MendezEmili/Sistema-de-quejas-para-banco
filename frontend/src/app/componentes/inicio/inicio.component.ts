@@ -16,6 +16,11 @@ import {Usuarios} from '../../modelos/usuarios';
 export class InicioComponent implements OnInit {
 
   autorizacion: boolean;
+  pPuntosAtencion: boolean = false;
+  pUsuarios: boolean = false;
+  pTipoQueja: boolean = false;
+  pQueja: boolean = true;
+
   token: any;
 
   usuario : Usuarios = {
@@ -30,6 +35,9 @@ export class InicioComponent implements OnInit {
     fecha_creacion: new Date()
     
   }
+
+  usuarios: any = [];
+
   constructor(private catalogosService: CatalogosService, private ruta: Router) { }
 
 
@@ -37,14 +45,27 @@ export class InicioComponent implements OnInit {
     this.autorizacion = false;
     this.token = this.catalogosService.getToken();
     if(this.token != null){
-      this.autorizacion = true;
+      var rol = this.catalogosService.getRol();
+      switch(rol){
+        case "Administrador":
+          this.pPuntosAtencion = true;
+          this.pUsuarios = true;
+          this.pTipoQueja = true;
+          break;
+        case "Recepctor":
+          break;
+      }
+      this.autorizacion = true
     }
   }
 
   login(){
     this.catalogosService.login(this.usuario.correo_usuario, this.usuario.password).subscribe(
       res=> {
-        this.catalogosService.setToken("valido");
+        this.usuarios = res;
+        console.log(this.usuarios[0].tipo_rol)
+        this.catalogosService.setUsuario("valido", this.usuarios[0].tipo_rol);
+        console.log(res)
         location.reload();    
       }, 
       err=> {

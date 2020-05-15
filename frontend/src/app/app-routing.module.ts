@@ -6,6 +6,8 @@ import { InicioComponent } from './componentes/inicio/inicio.component';
 import { PuntosAtencionComponent } from './componentes/puntos-atencion/puntos-atencion.component';
 import { TipoQuejaComponent } from './componentes/tipo-queja/tipo-queja.component';
 import { QuejaComponent } from './componentes/queja/queja.component';
+import { AutoconsultaComponent } from './componentes/autoconsulta/autoconsulta.component';
+import { QuejasIgresadasComponent } from './componentes/quejas-igresadas/quejas-igresadas.component';
 
 const routes: Routes = [
   {
@@ -31,6 +33,14 @@ const routes: Routes = [
   {
     path: 'queja',
     component: QuejaComponent
+  },
+  {
+    path: 'autoconsulta',
+    component: AutoconsultaComponent
+  },
+  {
+    path: 'quejasingresadas',
+    component: QuejasIgresadasComponent
   }
 ];
 

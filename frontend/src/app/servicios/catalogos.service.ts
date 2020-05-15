@@ -74,18 +74,25 @@ export class CatalogosService {
   }
 
   //Validacion de usuario 
-  setToken(token){
+  setUsuario(token, rol){
     localStorage.setItem("accessToken", token);
+    localStorage.setItem("rol", rol);
   }
   
   getToken(){
     return localStorage.getItem("accessToken");
   }
+
+  getRol(){
+    return localStorage.getItem("rol");
+  }
+
   login(correo_usuario, password){
     return this.http.get(`${this.URL_API_LG}login/${correo_usuario}/${password}`);
   }
   logout(){
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("rol");
   }
 
   //Tipos de quejas

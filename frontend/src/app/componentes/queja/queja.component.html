@@ -1,7 +1,7 @@
-<div *ngIf="autorizacion" class="container mt-4 pt-4">
+<div class="container mt-4 pt-4">
 
     <div>
-        <h2 class="text-center">Queja</h2> <!--Tilde en atencion-->
+        <h2 class="text-center">Queja</h2> 
         <hr class="bg-success">
     </div>
     <div class="row">
@@ -22,10 +22,10 @@
             <form #formularioQueja = "ngForm">
                 
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">Medio de ingreso*</label> <!--Tilde en region-->
+                    <label for="exampleFormControlSelect1">Medio de ingreso*</label>
                     <select class="form-control" [(ngModel)]="queja.medio_ingreso_queja" name="medio_ingreso_queja" id="exampleFormControlSelect1" > <!---->
                       <option> </option>
-                      <option *ngFor="let medioIngreso of mediosIngreso" (click)="establecerValores(medioIngreso.id_medio_ingreso_queja);">{{medioIngreso.id_medio_ingreso_queja}}. {{medioIngreso.descripcion_medio}} </option>
+                      <option *ngFor="let medioIngreso of mediosIngreso">{{medioIngreso.id_medio_ingreso_queja}}. {{medioIngreso.descripcion_medio}} </option>
                     </select>
                   </div>
                 <div class="form-group">
@@ -43,8 +43,7 @@
                 <div class="form-group">
                   <label for="exampleFormControlInput4">Oficina*: </label>
                   <select class="form-control" id="exampleFormControlSelect2" [(ngModel)]="queja.oficina" name="oficina"> <!---->
-                    <option> </option>
-                    <option *ngFor="let puntoAtencion of puntosAtencion" (click)="establecerValor(puntoAtencion.id);">{{puntoAtencion.nombre_puntodeatencion}} </option>
+                    <option *ngFor="let puntoAtencion of puntosAtencion">{{puntoAtencion.id}}. {{puntoAtencion.nombre_puntodeatencion}} </option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -76,7 +75,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
-                            <button type="button" class="btn btn-success" (click)="guardar();">Guardar</button>
+                            <button type="button" class="btn btn-success" (click)="guardar(queja.medio_ingreso_queja, queja.oficina);">Guardar</button>
                         </div>
                         <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
                             <button type="button" class="btn btn-success" (click)="resetForm(formularioQueja);">Cancelar</button>

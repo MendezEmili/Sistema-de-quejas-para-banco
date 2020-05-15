@@ -6,6 +6,7 @@ import { TipoQueja } from '../../modelos/tipo-queja';
 
 //Importar Servicio
 import { CatalogosService } from '../../servicios/catalogos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tipo-queja',
@@ -15,6 +16,7 @@ import { CatalogosService } from '../../servicios/catalogos.service';
 export class TipoQuejaComponent implements OnInit {
   error: any;
   respuesta: any; 
+  autorizacion: boolean;
 
   tipoQueja: TipoQueja ={
     siglas: '',
@@ -25,18 +27,25 @@ export class TipoQuejaComponent implements OnInit {
   tiposQueja: any = [];
   queja: any = [];
   
-  constructor(private catalogosService: CatalogosService) { }
+  constructor(private catalogosService: CatalogosService, private ruta: Router) { }
 
   ngOnInit(): void {
-    this.catalogosService.obtenerTiposQueja().subscribe(
-      res =>{
-        this.tiposQueja = res;
-      },
-      err =>{
-        console.log(err);
-        alert("Error en tipos de quejas")
-      }
-    )
+    this.autorizacion = false;
+    var token = this.catalogosService.getToken();
+    if(token == "valido"){
+      this.catalogosService.obtenerTiposQueja().subscribe(
+        res =>{
+          this.tiposQueja = res;
+        },
+        err =>{
+          console.log(err);
+          alert("Error en tipos de quejas")
+        }
+      )
+      this.autorizacion = true;
+    } else {
+      this.ruta.navigate(['/home'])
+    }
   }
 
   guardar(){

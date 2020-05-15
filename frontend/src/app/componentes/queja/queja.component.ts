@@ -6,6 +6,8 @@ import { MedioIngreso } from '../../modelos/medio-ingreso';
 import { PuntosAtencion } from '../../modelos/puntos-atencion';
 import { Queja } from '../../modelos/queja';
 import { CatalogosService } from 'src/app/servicios/catalogos.service';
+import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-queja',
@@ -49,30 +51,32 @@ export class QuejaComponent implements OnInit {
   }
   quejas: any = []
 
-  constructor(private catalogosService: CatalogosService) { }
+  constructor(private catalogosService: CatalogosService, private ruta: Router) { }
 
   ngOnInit(): void {
-    this.autorizacion = true;
     this.ingresoQueja = false;
+    var token = this.catalogosService.getToken();
+    if(token == "valido"){
+      this.autorizacion = true;
+    } else{
+      this.autorizacion = false;
+    }
   }
 
   actualizar(){
 
   }
 
-  establecerValores(id_medio_ingreso_queja){
-    this.queja.medio_ingreso_queja = id_medio_ingreso_queja;
-  }
-
-  establecerValor(id){
-    this.queja.oficina = id;
-  }
-
   buscar(){
 
   }
 
-  guardar(){
+  guardar(medio_queja, oficina){
+    var medio_queja = medio_queja.split(".");
+    this.queja.medio_ingreso_queja = medio_queja[0];
+    var oficina = oficina.split(".")
+    this.queja.oficina = oficina[0]
+
     this.queja.estado_externo = 1;
     this.queja.estado_interno = 1;
     this.queja.tipo_queja = "QMS";

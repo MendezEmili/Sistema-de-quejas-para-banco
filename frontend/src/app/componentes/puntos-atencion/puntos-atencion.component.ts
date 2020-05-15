@@ -56,7 +56,7 @@ export class PuntosAtencionComponent implements OnInit {
   ngOnInit(): void {
     this.autorizacion = false;
     this.token = this.catalogosService.getToken();
-    if(this.token != null){
+    if(this.token == "valido"){
       this.autorizacion = true;
       this.catalogosService.getRegiones().subscribe(
         res =>{
@@ -68,7 +68,7 @@ export class PuntosAtencionComponent implements OnInit {
         }
       )
     } else {
-      this.ruta.navigate(['/inicio'])
+      this.ruta.navigate(['/home'])
     }
   }
 

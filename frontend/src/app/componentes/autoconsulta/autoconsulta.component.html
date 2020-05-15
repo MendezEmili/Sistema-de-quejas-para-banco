@@ -1,0 +1,47 @@
+<div class="container mt-4 pt-4">
+
+    <div>
+        <h2 class="text-center">Consulta de Estado de Queja</h2> <!--Tilde en atencion-->
+        <hr class="bg-success">
+    </div>
+    <div class="row">
+        <div class="col-sm-1 col-md-1">
+
+        </div>
+        <div class="col-12 col-sm-10 col-md-10">
+            <form #formularioConsultaQueja = "ngForm">   
+                <div class="form-group">       
+                  <div class="row">
+                    <div class="col">
+                        <label for="exampleFormControlSelect1">Tipo de queja</label>
+                        <select class="form-control" id="modificarPuntoAtencion">
+                            <option></option>
+                            <option *ngFor="let tipoQueja of tiposQueja">{{tipoQueja.siglas}}</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="exampleFormControlInput1">No. Queja</label>
+                        <input type="number" class="form-control" id="exampleFormControlInput1" > <!---->
+                    </div>
+                    <div class="col">
+                        <label for="exampleFormControlInput1">Año</label>
+                        <select class="form-control" id="year">
+                            <option>2020</option>
+                            <option>2019</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                            <button type="button" class="btn btn-success">Consultar</button>
+                        </div>
+                        <div class="mt-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                            <button type="button" class="btn btn-success">Cancelar</button> <!---->
+                        </div>
+                    </div>
+                </div>
+              </form>
+        </div>
+    </div>
