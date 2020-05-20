@@ -59,6 +59,9 @@ export class AutoconsultaComponent implements OnInit {
       res =>{
         console.log(res);
         this.autoconsultas = res; 
+        if(this.autoconsultas[0].estado=="Finalizada"){
+          this.estadoFinalizado = true;
+        }
       }, 
       err =>{
         this.error = err; 
