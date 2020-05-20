@@ -9,23 +9,23 @@
 
         </div>
         <div class="col-12 col-sm-10 col-md-10">
-            <form #formularioConsultaQueja = "ngForm">   
+            <form #formularioAutoconsulta = "ngForm">   
                 <div class="form-group">       
                   <div class="row">
                     <div class="col">
                         <label for="exampleFormControlSelect1">Tipo de queja</label>
-                        <select class="form-control" id="modificarPuntoAtencion">
+                        <select class="form-control" id="modificarPuntoAtencion" [(ngModel)]="queja.tipo_queja" name="tipo_queja">
                             <option></option>
                             <option *ngFor="let tipoQueja of tiposQueja">{{tipoQueja.siglas}}</option>
                         </select>
                     </div>
                     <div class="col">
                         <label for="exampleFormControlInput1">No. Queja</label>
-                        <input type="number" class="form-control" id="exampleFormControlInput1" > <!---->
+                        <input type="number" class="form-control" id="exampleFormControlInput1" [(ngModel)]="queja.id_queja" name="id_queja"> <!---->
                     </div>
                     <div class="col">
                         <label for="exampleFormControlInput1">Año</label>
-                        <select class="form-control" id="year">
+                        <select class="form-control" id="year" [(ngModel)]="queja.ingreso_queja" name="ingreso_queja">
                             <option>2020</option>
                             <option>2019</option>
                         </select>
@@ -35,13 +35,35 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
-                            <button type="button" class="btn btn-success">Consultar</button>
+                            <button type="button" class="btn btn-success" (click)="verAutoconsulta();">Consultar</button>
                         </div>
                         <div class="mt-2 col-8 col-sm-7 col-md-4 col-lg-3">
-                            <button type="button" class="btn btn-success">Cancelar</button> <!---->
+                            <button type="button" class="btn btn-success" (click)="resetForm(formularioAutoconsulta);">Cancelar</button> <!---->
                         </div>
                     </div>
                 </div>
               </form>
         </div>
     </div>
+
+
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">No. Queja</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Resultado</th>
+            <th scope="col">Fecha de Ingreso</th>
+            <th scope="col" *ngIf="estadoFinalizado">Fecha Resuelta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let autoconsulta of autoconsultas">
+            <th scope="row">{{queja.tipo_queja}}-{{queja.id_queja}}-{{queja.ingreso_queja}}</th>
+            <td>{{autoconsulta.estado}}</td>
+            <td>{{autoconsulta.resultado}}</td>
+            <td>{{autoconsulta.fecha_ingreso}}</td>
+            <td *ngIf="estadoFinalizado"></td>
+          </tr>
+        </tbody>
+      </table>

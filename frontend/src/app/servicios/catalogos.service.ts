@@ -130,4 +130,9 @@ export class CatalogosService {
   insertarQueja(queja: Queja){
     return this.http.post(`${this.URL_API_Q}insertar`, queja);
   }
+
+  //Autoconsulta 
+  autoconsulta(tipo_queja, id_queja, fecha){
+    return this.http.get(`${this.URL_API_Q}autoconsulta/${tipo_queja}/${id_queja}/${fecha}`)
+  }
 }

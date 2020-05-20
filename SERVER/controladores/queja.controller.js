@@ -59,7 +59,7 @@ quejaCtrl.autoconsulta = async(req, res)=>{
   var id_queja = req.params.id_queja;
   var fecha = req.params.fecha;
 
-  var sql = `SELECT q.estado_externo, q.resultado, e.estado FROM queja q INNER JOIN estados_externos e ON q.estado_externo = e.id_estado_externo WHERE tipo_queja = "${tipo_queja}" AND id_queja=${id_queja} AND YEAR(fecha_ingreso) = ${fecha}`;
+  var sql = `SELECT q.resultado, e.estado, q.fecha_ingreso FROM queja q INNER JOIN estados_externos e ON q.estado_externo = e.id_estado_externo WHERE tipo_queja = "${tipo_queja}" AND id_queja=${id_queja} AND YEAR(fecha_ingreso) = ${fecha}`;
 
   await conexion.query(sql, (err, resultado)=>{
     if(err){
