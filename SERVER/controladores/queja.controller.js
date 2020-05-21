@@ -4,6 +4,7 @@ const app = express();
 const fecha = require('../modelos/fechas')
 const quejaCtrl = {};
 
+//Insertar queja nueva
 quejaCtrl.insertarQueja = async(req, res)=>{
     var medio_ingreso_queja = req.body.medio_ingreso_queja;
     var nombre = req.body.nombre;
@@ -53,7 +54,7 @@ quejaCtrl.insertarQueja = async(req, res)=>{
     });
 }
 
-
+//Autoconsulta para cuentahabiente
 quejaCtrl.autoconsulta = async(req, res)=>{
   var tipo_queja = req.params.tipo_queja;
   var id_queja = req.params.id_queja;
@@ -68,6 +69,40 @@ quejaCtrl.autoconsulta = async(req, res)=>{
       return res.status(404).send("El número de la queja no existe, verifique si ingresó el número correcto.")
     } else{
       return res.json(resultado);
+    }
+  })
+}
+
+//Consulta para quejas en estado interno y externo presentado
+quejaCtrl.quejasPresentadas = async(req, res) =>{
+  var sql = `SELECT * FROM queja WHERE estado_externo = 1 AND estado_interno = 1`;
+
+  await conexion.query(sql, (err, resultado)=>{
+    if(err){
+      return res.status(400).send("Error al realizar consulta")
+    } else {
+      return res.json(resultado)
+    }
+  })
+}
+
+
+//Asignar queja a punto de atencion 
+quejaCtrl.asignarQueja = async(req, res) =>{
+  var id_queja = req.body.id_queja;
+  var id_puntosdeatencion = req.body.id_puntosdeatencion;
+  var fecha_ingreso = fecha.fecha();
+  
+  var asignarQueja ={
+    id_queja, id_puntosdeatencion, fecha_ingreso
+  }
+  var sql = `INSERT INTO asignar_queja_punto SET ?`
+
+  await conexion.query(sql, asignarQueja, (err, resultado)=>{
+    if(err){
+      return res.status(400).send("No fue posible asignar la queja al punto de atención")
+    } else {
+      return res.status(200).send("Asignada correctamente")
     }
   })
 }

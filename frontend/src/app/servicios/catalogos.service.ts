@@ -135,4 +135,9 @@ export class CatalogosService {
   autoconsulta(tipo_queja, id_queja, fecha){
     return this.http.get(`${this.URL_API_Q}autoconsulta/${tipo_queja}/${id_queja}/${fecha}`)
   }
+
+  //Consultar queja para centralizador en estado = presentada 
+  quejasPresentadas(){
+    return this.http.get(`${this.URL_API_Q}quejaspresentadas`);
+  }
 }

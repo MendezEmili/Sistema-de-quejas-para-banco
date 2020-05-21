@@ -1,1 +1,85 @@
-<p>quejas-igresadas works!</p>
+<div class="mt-4 pt-4">
+    <div>
+        <h2 class="text-center">Quejas Ingresadas por Mal Servicio</h2>
+        <hr class="bg-success">
+    </div>
+    <div>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Correlativo</th>
+                <th scope="col">Fecha de ingreso</th>
+                <th scope="col">Administrar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let queja of quejas">
+                <th scope="row">{{queja.tipo_queja}}-{{queja.id_queja}}-2020 </th>
+                <td>{{queja.fecha_ingreso}}</td>
+                <td><button class="btn btn-success btn-lg ml-2 mb-2" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  Ver Ficha
+                </button>
+                <!--Inicio de collapse de ficha-->
+                <div class="collapse" id="collapseExample">
+                  <div class="card card-body">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Correlativo</th>
+                          <th scope="col">Nombre</th>
+                          <th scope="col">Correo</th>
+                          <th scope="col">Teléfono</th>
+                          <th scope="col">Oficina</th>
+                          <th scope="col">Nombre empleado</th>
+                          <th scope="col">fecha de creación</th>
+                          <th scope="col">Medio de ingreso</th>
+                          <th scope="col">Detalle de queja</th>
+                          <th scope="col">Descargar archivos</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th>{{queja.tipo_queja}}-{{queja.id_queja}}-2020</th>
+                          <td>{{queja.nombre}} </td>
+                          <th>{{queja.correo}}</th>
+                          <th>{{queja.telefono}}</th>
+                          <th>{{queja.oficina}}</th>
+                          <td>{{queja.dpi_empleado}}</td>
+                          <td>{{queja.fecha_ingreso}}</td>
+                          <td>{{queja.ingreso_queja}} </td>
+                          <td>{{queja.detalle_queja}} </td>
+                          <td><button type="button"></button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <!--Final de modal de ficha-->
+
+                    <button type="button" class="btn btn-success btn-lg ml-2 mb-2">Asignar</button>
+                    <button type="button" class="btn btn-success btn-lg ml-2 mb-2">Rechazar</button>
+                    <button type="button" class="btn btn-success btn-lg ml-2 mb-2" data-toggle="modal" data-target="#modificarDatosModal">Ingresar a detalle</button>
+                </td>
+              </tr>
+            </tbody>          
+          </table>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modificarDatosModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      </div>  
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
