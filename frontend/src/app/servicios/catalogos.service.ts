@@ -173,4 +173,8 @@ export class CatalogosService {
   consultarQuejaAtendidas(correo_usuario, estado1, estado2, estado3){
     return this.http.get(`${this.URL_API_Q}consultarquejasatendidas/${correo_usuario}/${estado1}/${estado2}/${estado3}`);
   }
+
+
+  //Reportes 
+  //Reporte por numero de reporte
 }

@@ -30,6 +30,7 @@ app.use('/auth', require('./rutas/auth.rutas'));
 app.use('/tipoqueja', require('./rutas/tipoqueja.rutas'));     
 app.use('/detallequeja', require('./rutas/detalleQueja.rutas'));
 app.use('/queja', require('./rutas/queja.rutas'));
+app.use('/reporte', require('./rutas/reporte.rutas'));
 app.use('/', (req, res)=>{
     res.json({
         status: 'Sistema de Banco Mi Pistio'

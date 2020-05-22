@@ -21,6 +21,12 @@ import { QuejasProcesoAtencionComponent } from './componentes/quejas-proceso-ate
 import { ReporteComponent } from './componentes/reporte/reporte.component';
 
 import { from } from 'rxjs';
+import { PdfMakeWrapper } from 'pdfmake-wrapper';
+import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
+ 
+// Set the fonts to use
+PdfMakeWrapper.setFonts(pdfFonts);
+
 
 @NgModule({
   declarations: [
