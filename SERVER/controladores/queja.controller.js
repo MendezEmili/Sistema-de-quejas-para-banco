@@ -112,7 +112,7 @@ quejaCtrl.asignarQueja = async(req, res) =>{
 }
 
 //Actualizar estados y resultado de queja
-quejaCtrl.actualizarEstadoQueja = async(req, res) =>{
+quejaCtrl.actualizarEstadoResultadoQueja = async(req, res) =>{
   var tipo_queja = req.params.tipo_queja; 
   var id_queja = req.params.id_queja;
   var estado_externo = req.body.estado_externo; 
@@ -135,4 +135,76 @@ quejaCtrl.actualizarEstadoQueja = async(req, res) =>{
     }
   })
 }
+
+
+//Actualizar estados
+quejaCtrl.actualizarEstadoQueja = async(req, res) =>{
+  var tipo_queja = req.params.tipo_queja; 
+  var id_queja = req.params.id_queja;
+  var estado_externo = req.body.estado_externo; 
+  var estado_interno = req.body.estado_interno; 
+
+  var sql = `UPDATE queja SET estado_externo=${estado_externo}, estado_interno=${estado_interno} WHERE tipo_queja="${tipo_queja}" AND id_queja=${id_queja}`
+
+  await conexion.query(sql, (err, resultado)=>{
+    if(err){
+      return res.status(400).send("Error al cambiar estado de queja")
+      console.log("Error al cambiar estado de queja")
+    } else {
+      return res.json({
+        status: 200,
+        mensaje: "Queja actualizada correctamente"
+      })
+      console.log("Estados actualizados correctamente")
+    }
+  })
+}
+
+//Consulta de quejas asignadas a un punto de atencion
+quejaCtrl.quejasPuntoAtencion = async(req, res)=>{
+  var correo_usuario = req.params.correo_usuario;
+  var estado1 = req.params.estado1; 
+  var estado2 = req.params.estado2;
+  var estado3 = req.params.estado3;
+
+  var sql = `SELECT q.id_queja, q.tipo_queja, q.justificacion, q.fecha_ingreso, q.archivo, q.detalle_queja, ee.estado, ei.estado_i, pa.nombre_puntodeatencion FROM queja q 
+  INNER JOIN estados_externos ee ON ee.id_estado_externo = q.estado_externo 
+  INNER JOIN estados_internos ei ON ei.id_estado_interno = q.estado_interno
+  INNER JOIN puntosdeatencion pa ON pa.id = q.oficina 
+  INNER JOIN usuarios u ON u.id_puntosdeatencion = pa.id
+  WHERE u.correo_usuario = "${correo_usuario}" AND q.estado_externo = 2 AND q.estado_interno=${estado1} OR q.estado_interno=${estado2} OR q.estado_interno=${estado3}`;
+
+  await conexion.query(sql, (err, resultado)=>{
+    if(err){
+      return res.status(400).send("Error en consulta");
+    } else{
+      return res.json(resultado)
+    }
+  })
+}
+
+
+//Consulta de quejas atendidas para rol centralizador
+quejaCtrl.quejasAtendidasCentralizador = async(req, res)=>{
+  var correo_usuario = req.params.correo_usuario;
+  var estado1 = req.params.estado1; 
+  var estado2 = req.params.estado2;
+  var estado3 = req.params.estado3;
+  
+  var sql = `SELECT q.id_queja, q.tipo_queja, q.justificacion, q.fecha_ingreso, q.archivo, q.detalle_queja, ee.estado, ei.estado_i, pa.nombre_puntodeatencion FROM queja q 
+  INNER JOIN estados_externos ee ON ee.id_estado_externo = q.estado_externo 
+  INNER JOIN estados_internos ei ON ei.id_estado_interno = q.estado_interno
+  INNER JOIN puntosdeatencion pa ON pa.id = q.oficina 
+  INNER JOIN usuarios u ON u.id_puntosdeatencion = pa.id
+  WHERE q.estado_externo = 2 AND q.estado_interno=${estado1} OR q.estado_interno=${estado2} OR q.estado_interno=${estado3}`;
+
+  await conexion.query(sql, (err, resultado)=>{
+    if(err){
+      return res.status(400).send("Error en consulta");
+    } else{
+      return res.json(resultado)
+    }
+  })
+}
+
 module.exports = quejaCtrl; 

@@ -16,6 +16,8 @@ import { TipoQuejaComponent } from './componentes/tipo-queja/tipo-queja.componen
 import { QuejaComponent } from './componentes/queja/queja.component';
 import { AutoconsultaComponent } from './componentes/autoconsulta/autoconsulta.component';
 import { QuejasIgresadasComponent } from './componentes/quejas-igresadas/quejas-igresadas.component';
+import { SeguimientoQuejasAsignadasComponent } from './componentes/seguimiento-quejas-asignadas/seguimiento-quejas-asignadas.component';
+import { QuejasProcesoAtencionComponent } from './componentes/quejas-proceso-atencion/quejas-proceso-atencion.component';
 
 import { from } from 'rxjs';
 
@@ -30,7 +32,9 @@ import { from } from 'rxjs';
     TipoQuejaComponent,
     QuejaComponent,
     AutoconsultaComponent,
-    QuejasIgresadasComponent
+    QuejasIgresadasComponent,
+    SeguimientoQuejasAsignadasComponent,
+    QuejasProcesoAtencionComponent
   ],
   imports: [
     BrowserModule,

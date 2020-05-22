@@ -75,9 +75,10 @@ export class CatalogosService {
   }
 
   //Validacion de usuario 
-  setUsuario(token, rol){
+  setUsuario(token, rol, correo_usuario){
     localStorage.setItem("accessToken", token);
     localStorage.setItem("rol", rol);
+    localStorage.setItem("correo_usuario", correo_usuario);
   }
   
   getToken(){
@@ -88,12 +89,17 @@ export class CatalogosService {
     return localStorage.getItem("rol");
   }
 
+  getCorreo(){
+    return localStorage.getItem("correo_usuario");
+  }
+
   login(correo_usuario, password){
     return this.http.get(`${this.URL_API_LG}login/${correo_usuario}/${password}`);
   }
   logout(){
     localStorage.removeItem("accessToken");
     localStorage.removeItem("rol");
+    localStorage.removeItem("correo_usuario");
   }
 
   //Tipos de quejas
@@ -150,6 +156,21 @@ export class CatalogosService {
   //actualizar estado y resultado de queja
   actualizarEstadoResultadoQueja(tipo_queja, id_queja, queja: Queja){
     console.log(queja)
-    return this.http.put(`${this.URL_API_Q}actualizarestadoqueja/${tipo_queja}/${id_queja}`, queja);
+    return this.http.put(`${this.URL_API_Q}actualizarestadoresultadoqueja/${tipo_queja}/${id_queja}`, queja);
+  }
+
+   //actualizar estado de queja
+   actualizarEstadosQueja(tipo_queja, id_queja, queja: Queja){
+    console.log(queja)
+    return this.http.put(`${this.URL_API_Q}actualizarestadosqueja/${tipo_queja}/${id_queja}`, queja);
+  }
+
+  //Consultar queja asignada para un operador 
+  consultarQuejaOperador(correo_usuario, estado1, estado2, estado3){
+    return this.http.get(`${this.URL_API_Q}consultarquejas/${correo_usuario}/${estado1}/${estado2}/${estado3}`);
+  }
+
+  consultarQuejaAtendidas(correo_usuario, estado1, estado2, estado3){
+    return this.http.get(`${this.URL_API_Q}consultarquejasatendidas/${correo_usuario}/${estado1}/${estado2}/${estado3}`);
   }
 }

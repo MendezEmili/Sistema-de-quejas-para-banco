@@ -1,0 +1,101 @@
+<div class="container mt-4 pt-4">
+    <div class="text-center">
+        <h2>Seguimiento de Quejas Por Mal Servicio Asignadas</h2>
+        <hr class="bg-success">
+    </div>
+    <div>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Correlativo</th>
+                <th scope="col">Etapa</th>
+                <th scope="col">Detalle queja</th>
+                <th>Administrar</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let quejaAsignada of quejasAsignadas">
+                    <td>{{quejaAsignada.tipo_queja}}-{{quejaAsignada.id_queja}}-2020 </td>
+                    <td>{{quejaAsignada.estado_i}} </td>
+                    <td>{{quejaAsignada.detalle_queja}} </td>
+                    <td>
+                        <button class="btn btn-success ml-2 mb-2" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Ver ficha</button>
+                                        <!--Inicio de collapse de ficha-->
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">No. queja</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Etapa</th>
+                            <th scope="col">justificación</th>
+                            <th scope="col">Fecha de creación</th>
+                            <th scope="col">Usuario de creación</th>
+                            <th scope="col">Punto de atención</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{{quejaAsignada.tipo_queja}}-{{quejaAsignada.id_queja}}-2020</td>
+                            <td>{{quejaAsignada.estado}} </td>
+                            <td>{{quejaAsignada.estado_i}} </td>
+                            <td>{{quejaAsignada.justificacion}}</td>
+                            <td>{{quejaAsignada.fecha_ingreso}}</td>
+                            <td></td>                          
+                            <td>{{quejaAsignada.nombre_puntodeatencion}}</td>
+                            <td><button type="button"></button></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <!--Final de modal de ficha-->
+                        <button class="btn btn-success ml-2 mb-2" *ngIf="!quejaAceptada" (click)="procedente(quejaAsignada.tipo_queja, quejaAsignada.id_queja);">Procedente</button>
+                        <button class="btn btn-success ml-2 mb-2" *ngIf="!quejaAceptada" data-toggle="modal" data-target="#rechazar" (click)="rechazo(quejaAsignada.tipo_queja, quejaAsignada.id_queja)" >Rechazar</button>                       
+                        <button class="btn btn-success ml-2 mb-2" *ngIf="quejaAceptada" data-toggle="collapse" data-target="#collapseJustificacion">Ingresar detalle</button>
+                        <div class="collapse" id="collapseJustificacion">
+                          <div class="mt-4 mb-4">
+                            <label class="ml-3 mr-4">justificación: </label>
+                              <input type="text" class="ml-3" [(ngModel)]="queja.justificacion" name="justificacion">
+                              <button type="file" class="btn btn-sm btn-success">cargar archivo</button>
+                          </div>
+                        </div>
+                        <button class="btn btn-success ml-2 mb-2" *ngIf="quejaAceptada" (click)="resolver(quejaAsignada.tipo_queja, quejaAsignada.id_queja)">Resolver</button>
+                    </td>
+                </tr>
+            </tbody>
+                    </table>        
+</div>
+
+
+<!--Inicio de modal-->
+<div class="modal fade" id="rechazar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ficha de queja</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label>justificación</label>
+                <div>
+                    <input type="text" [(ngModel)]="queja.justificacion" name="justificacion">
+                </div>
+              </div>
+
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-success" (click)="rechazarQueja();" >Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Final de modal-->
