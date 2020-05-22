@@ -21,6 +21,7 @@ export class InicioComponent implements OnInit {
   pTipoQueja: boolean = false;
   pQueja: boolean = true;
   pQuejasIngresadas: boolean = false; 
+  pSeguimientoQuejasAsignadas: boolean = false; 
 
   token: any;
 
@@ -57,6 +58,9 @@ export class InicioComponent implements OnInit {
           break;
         case "Centralizador":
           this.pQuejasIngresadas = true;
+          break;
+        case "Operador":
+          this.pSeguimientoQuejasAsignadas = true;
           break;
       }
       this.autorizacion = true
