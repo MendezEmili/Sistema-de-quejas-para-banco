@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { NgxFileDropModule} from 'ngx-file-drop';
+import {RecaptchaModule} from 'ng-recaptcha';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,8 @@ import { QuejasIgresadasComponent } from './componentes/quejas-igresadas/quejas-
 import { SeguimientoQuejasAsignadasComponent } from './componentes/seguimiento-quejas-asignadas/seguimiento-quejas-asignadas.component';
 import { QuejasProcesoAtencionComponent } from './componentes/quejas-proceso-atencion/quejas-proceso-atencion.component';
 import { ReporteComponent } from './componentes/reporte/reporte.component';
+
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -40,9 +43,13 @@ import { ReporteComponent } from './componentes/reporte/reporte.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgxFileDropModule
+    NgxFileDropModule,
+    RecaptchaModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+  
+}
