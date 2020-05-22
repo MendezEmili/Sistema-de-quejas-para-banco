@@ -91,20 +91,48 @@ quejaCtrl.quejasPresentadas = async(req, res) =>{
 quejaCtrl.asignarQueja = async(req, res) =>{
   var id_queja = req.body.id_queja;
   var id_puntosdeatencion = req.body.id_puntosdeatencion;
-  var fecha_ingreso = fecha.fecha();
+  var fecha_asignacion = fecha.fecha();
   
-  var asignarQueja ={
-    id_queja, id_puntosdeatencion, fecha_ingreso
+  const asignarQueja ={
+    id_queja, id_puntosdeatencion, fecha_asignacion
   }
-  var sql = `INSERT INTO asignar_queja_punto SET ?`
 
-  await conexion.query(sql, asignarQueja, (err, resultado)=>{
+  await conexion.query("INSERT INTO asignar_queja_punto SET ?", asignarQueja, (err, resultado)=>{
     if(err){
       return res.status(400).send("No fue posible asignar la queja al punto de atención")
+      console.log("No fue posible asignar la queja al punto de atención")
     } else {
-      return res.status(200).send("Asignada correctamente")
+      return res.json({
+        status: 200,
+        mensaje: "Queja asignada correctamente"
+      })
+      console.log("Asignada correctamente")
     }
   })
 }
 
-module.exports = quejaCtrl;
+//Actualizar estados y resultado de queja
+quejaCtrl.actualizarEstadoQueja = async(req, res) =>{
+  var tipo_queja = req.params.tipo_queja; 
+  var id_queja = req.params.id_queja;
+  var estado_externo = req.body.estado_externo; 
+  var estado_interno = req.body.estado_interno; 
+  var resultado = req.body.resultado; 
+  var justificacion = req.body.justificacion
+
+  var sql = `UPDATE queja SET estado_externo=${estado_externo}, estado_interno=${estado_interno}, resultado="${resultado}", justificacion="${justificacion}" WHERE tipo_queja="${tipo_queja}" AND id_queja=${id_queja}`
+
+  await conexion.query(sql, (err, resultado)=>{
+    if(err){
+      return res.status(400).send("Error al cambiar estado de queja")
+      console.log("Error al cambiar estado de queja")
+    } else {
+      return res.json({
+        status: 200,
+        mensaje: "Queja actualizada correctamente"
+      })
+      console.log("Estados actualizados correctamente")
+    }
+  })
+}
+module.exports = quejaCtrl; 
