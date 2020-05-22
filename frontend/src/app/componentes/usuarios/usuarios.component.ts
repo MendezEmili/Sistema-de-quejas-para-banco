@@ -9,6 +9,7 @@ import {CatalogosService} from '../../servicios/catalogos.service';
 import {Usuarios} from '../../modelos/usuarios';
 import {PuntosAtencion} from '../../modelos/puntos-atencion';
 import { Region } from '../../modelos/region';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,6 +20,7 @@ import { Region } from '../../modelos/region';
 
 
 export class UsuariosComponent implements OnInit {
+  token: any; 
 
   usuario : Usuarios = {
     dpi: 0,
@@ -47,18 +49,24 @@ export class UsuariosComponent implements OnInit {
   usuarioDPI: any;
   nombre: any;
 
-  constructor(private catalogosServices: CatalogosService) { }
+  constructor(private catalogosServices: CatalogosService, private ruta:Router) { }
 
   ngOnInit(): void {
-    this.catalogosServices.getRegiones().subscribe(
-      res =>{
-        this.regiones = res;
-        console.log(this.regiones)
-      },
-      err =>{
-        console.log(err)
-      }
-    )
+    this.token = this.catalogosServices.getToken();
+    if(this.token == "valido"){
+      this.catalogosServices.getRegiones().subscribe(
+        res =>{
+          this.regiones = res;
+          console.log(this.regiones)
+        },
+        err =>{
+          console.log(err)
+        }
+      )
+    } else {
+      this.ruta.navigate(['/home'])
+    }
+ 
   }
 
   resetForm(form?: NgForm){

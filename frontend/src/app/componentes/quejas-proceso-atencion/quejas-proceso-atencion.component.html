@@ -57,7 +57,7 @@
                             <div class="mt-4 mb-4">
                               <label class="ml-3 mr-4">justificación: </label>
                                 <input type="text" class="ml-3" [(ngModel)]="queja.justificacion" name="justificacion">
-                                <button type="file" class="btn btn-sm btn-success">cargar archivo</button>
+                                <input type="file">
                                     <button class="btn btn-sm btn-success ml-4" (click)="rechazarQueja();">Guardar</button>                             
                             </div>
                           </div>                 
@@ -66,7 +66,7 @@
                           <div class="mt-4 mb-4">
                             <label class="ml-3 mr-4">Resultado: </label>
                               <input type="text" class="ml-3" [(ngModel)]="queja.resultado" name="resultado">
-                              <button type="file" class="btn btn-sm btn-success">cargar archivo</button>
+                              <input type="file">
                                   <button class="btn btn-sm btn-success ml-4" (click)="resolver(quejaAsignada.tipo_queja, quejaAsignada.id_queja, quejaAsignada.justificacion);">Guardar</button>                             
                           </div>
                         </div>

@@ -59,7 +59,7 @@
                           <div class="mt-4 mb-4">
                             <label class="ml-3 mr-4">justificación: </label>
                               <input type="text" class="ml-3" [(ngModel)]="queja.justificacion" name="justificacion">
-                              <button type="file" class="btn btn-sm btn-success">cargar archivo</button>
+                              <input type="file">
                           </div>
                         </div>
                         <button class="btn btn-success ml-2 mb-2" *ngIf="quejaAceptada" (click)="resolver(quejaAsignada.tipo_queja, quejaAsignada.id_queja)">Resolver</button>
