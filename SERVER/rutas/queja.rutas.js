@@ -18,6 +18,17 @@ rutas.get('/quejaspresentadas', quejaCtrl.quejasPresentadas);
 rutas.post('/asignarquejapunto', quejaCtrl.asignarQueja);
 
 //Actualizar estados y resultado de queja 
-rutas.put('/actualizarestadoqueja/:tipo_queja/:id_queja', quejaCtrl.actualizarEstadoQueja);
+rutas.put('/actualizarestadoresultadoqueja/:tipo_queja/:id_queja', quejaCtrl.actualizarEstadoResultadoQueja);
+
+//Actualizar estados de queja 
+rutas.put('/actualizarestadosqueja/:tipo_queja/:id_queja', quejaCtrl.actualizarEstadoQueja);
+
+//Consultar quejas asignadas a un punto de atencion por medio de usuario con rol operador
+rutas.get('/consultarquejas/:correo_usuario/:estado1/:estado2/:estado3', quejaCtrl.quejasPuntoAtencion);
+
+//Consultar quejas atendidas para rol Centralizador
+rutas.get('/consultarquejasatendidas/:correo_usuario/:estado1/:estado2/:estado3', quejaCtrl.quejasAtendidasCentralizador);
+
+
 
 module.exports = rutas; 

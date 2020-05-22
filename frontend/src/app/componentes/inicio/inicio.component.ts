@@ -22,6 +22,7 @@ export class InicioComponent implements OnInit {
   pQueja: boolean = true;
   pQuejasIngresadas: boolean = false; 
   pSeguimientoQuejasAsignadas: boolean = false; 
+  pQuejasProcesoAtencion: boolean = false;
 
   token: any;
 
@@ -58,6 +59,7 @@ export class InicioComponent implements OnInit {
           break;
         case "Centralizador":
           this.pQuejasIngresadas = true;
+          this.pQuejasProcesoAtencion = true;
           break;
         case "Operador":
           this.pSeguimientoQuejasAsignadas = true;
@@ -71,8 +73,8 @@ export class InicioComponent implements OnInit {
     this.catalogosService.login(this.usuario.correo_usuario, this.usuario.password).subscribe(
       res=> {
         this.usuarios = res;
-        console.log(this.usuarios[0].tipo_rol)
-        this.catalogosService.setUsuario("valido", this.usuarios[0].tipo_rol);
+        console.log(this.usuarios[0].correo_usuario)
+        this.catalogosService.setUsuario("valido", this.usuarios[0].tipo_rol, this.usuarios[0].correo_usuario);
         console.log(res)
         location.reload();    
       }, 

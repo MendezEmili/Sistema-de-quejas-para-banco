@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { CatalogosService } from 'src/app/servicios/catalogos.service';
+import { Router } from '@angular/router';
 
 //Modelos 
 import { Queja } from '../../modelos/queja';
-import { Router } from '@angular/router';
+import { Region } from '../../modelos/region';
+import { PuntosAtencion } from '../../modelos/puntos-atencion';
+import { AsignarQuejaPunto } from '../../modelos/asignar-queja-punto';
 
 @Component({
-  selector: 'app-seguimiento-quejas-asignadas',
-  templateUrl: './seguimiento-quejas-asignadas.component.html',
-  styleUrls: ['./seguimiento-quejas-asignadas.component.css']
+  selector: 'app-quejas-proceso-atencion',
+  templateUrl: './quejas-proceso-atencion.component.html',
+  styleUrls: ['./quejas-proceso-atencion.component.css']
 })
-export class SeguimientoQuejasAsignadasComponent implements OnInit {
+export class QuejasProcesoAtencionComponent implements OnInit {
   
   token: any;
   correo_usuario: any;
@@ -48,6 +50,27 @@ export class SeguimientoQuejasAsignadasComponent implements OnInit {
     justificacion: null
   }
 
+  region: Region = {
+    id_region: 0,
+    nombre_region: ''
+  }
+
+  regiones: any = []
+
+  puntoAtencion: PuntosAtencion = {
+    id: 0,
+    nombre_puntodeatencion: '',
+    estado_puntodeatencion: 0,
+    region_puntodeatencion: ''
+  }
+
+  puntosAtencion: any; 
+
+  asignarQuejaPunto: AsignarQuejaPunto ={
+    id_asignacion_queja_punto: 0,
+    id_queja: 0,
+    id_puntosdeatencion: 0
+  }
 
   constructor(private catalogosService: CatalogosService, private ruta: Router) { }
 
@@ -55,7 +78,7 @@ export class SeguimientoQuejasAsignadasComponent implements OnInit {
     this.token = this.catalogosService.getToken();
     if(this.token == "valido"){
       this.correo_usuario = this.catalogosService.getCorreo();
-      this.catalogosService.consultarQuejaOperador(this.correo_usuario, 4, 8, 5).subscribe(
+      this.catalogosService.consultarQuejaOperador(this.correo_usuario, 4, 6, 7).subscribe(
         res =>{
           this.quejasAsignadas = res;
           console.log(this.quejasAsignadas)
@@ -81,23 +104,6 @@ export class SeguimientoQuejasAsignadasComponent implements OnInit {
     this.quejaAsignada.nombre_puntodeatencion = nombre_puntodeatencion;
   }
 
-  procedente(tipo, id){
-    this.queja.estado_externo = 2; 
-    this.queja.estado_interno = 5; 
-    var confirmar = confirm("Queja será actualizada a estado procedente, oprima Aceptar si está de acuerdo o Cerrar si no lo está")
-    if(confirmar){
-      this.quejaAceptada = true;
-      this.catalogosService.actualizarEstadosQueja(tipo, id, this.queja).subscribe(
-        res=>{
-          console.log(res)
-        },
-        err =>{
-          alert("No fue posible cambiar el estado")
-        }
-      )
-    }
-    
-  }
 
   rechazo(tipo, id){
     this.queja.tipo_queja = tipo; 
@@ -106,7 +112,7 @@ export class SeguimientoQuejasAsignadasComponent implements OnInit {
 
   rechazarQueja(){
     this.queja.estado_externo = 2;
-    this.queja.estado_interno = 6; 
+    this.queja.estado_interno = 8; 
     this.queja.resultado = this.queja.justificacion;
     this.catalogosService.actualizarEstadoResultadoQueja(this.queja.tipo_queja, this.queja.id_queja, this.queja).subscribe(
       res=>{
@@ -118,12 +124,10 @@ export class SeguimientoQuejasAsignadasComponent implements OnInit {
     )
   }
 
-  resolver(tipo, id){
-    var confirmar = confirm("Queja será resuelta, verificar que haya ingresado detalles de la gestión, no se podrá ingresar más información");
-    if(confirmar){
-      this.queja.estado_externo = 2;
-      this.queja.estado_interno = 7;
-      this.queja.resultado = this.queja.justificacion;
+  resolver(tipo, id, justificacion){
+      this.queja.estado_externo = 3;
+      this.queja.estado_interno = 9;
+      this.queja.justificacion = justificacion
       this.catalogosService.actualizarEstadoResultadoQueja(tipo, id, this.queja).subscribe(
         res =>{
           location.reload();
@@ -133,6 +137,63 @@ export class SeguimientoQuejasAsignadasComponent implements OnInit {
           alert("Error al resolver queja")
         }
       )
-    }
   }
+
+  buscarRegiones(tipo, id){
+    this.catalogosService.getRegiones().subscribe(
+      res =>{
+        this.regiones = res;
+        console.log(this.regiones)
+      },
+      err =>{
+        console.log(err)
+      }
+    )
+  this.queja.tipo_queja = tipo; 
+  this.queja.id_queja = id;
+  }
+
+  buscar(id_region){
+    this.catalogosService.buscarPuntoAtencionRegion(id_region).subscribe(
+      res=>{
+        this.puntosAtencion = res;
+        console.log(res)
+      },
+      err =>{
+        console.log(err)
+      }
+    )
+  }
+
+  asignarValores(id){
+    this.asignarQuejaPunto.id_puntosdeatencion = id; 
+    this.asignarQuejaPunto.id_queja = this.queja.id_queja;
+  }
+
+
+  asignar(){
+    this.queja.estado_externo = 2; 
+    this.queja.estado_interno = 4; 
+    this.queja.resultado = "Trasladada al Administrador del punto de atención correspondiente para su análisis."
+    this.catalogosService.asignarQuejaPunto(this.asignarQuejaPunto).subscribe(
+     res =>{
+       console.log(res);
+       this.catalogosService.actualizarEstadoResultadoQueja(this.queja.tipo_queja, this.queja.id_queja, this.queja).subscribe(
+         res =>{
+          console.log(res);
+          alert("Trasladada al Administrador del punto de atención correspondiente para su análisis.");
+          location.reload();
+         }, 
+         err =>{
+           alert("No fue posible actualizar estado de queja")
+         }
+       )
+     },
+     err =>{
+       alert("No fue posible asignar queja a punto de atención");
+     }
+    )
+
+  }
+
 }
