@@ -20,6 +20,7 @@ import { SeguimientoQuejasAsignadasComponent } from './componentes/seguimiento-q
 import { QuejasProcesoAtencionComponent } from './componentes/quejas-proceso-atencion/quejas-proceso-atencion.component';
 
 import { from } from 'rxjs';
+import { RecaptchaComponent } from './componentes/recaptcha/recaptcha.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { from } from 'rxjs';
     AutoconsultaComponent,
     QuejasIgresadasComponent,
     SeguimientoQuejasAsignadasComponent,
-    QuejasProcesoAtencionComponent
+    QuejasProcesoAtencionComponent,
+    RecaptchaComponent
   ],
   imports: [
     BrowserModule,
