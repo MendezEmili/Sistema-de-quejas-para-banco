@@ -5,6 +5,7 @@ import { PuntosAtencion } from '../modelos/puntos-atencion';
 import { Usuarios } from '../modelos/usuarios';
 import { TipoQueja } from '../modelos/tipo-queja';
 import { Queja } from '../modelos/queja';
+import { AsignarQuejaPunto } from '../modelos/asignar-queja-punto';
 
 @Injectable({
   providedIn: 'root'
@@ -139,5 +140,16 @@ export class CatalogosService {
   //Consultar queja para centralizador en estado = presentada 
   quejasPresentadas(){
     return this.http.get(`${this.URL_API_Q}quejaspresentadas`);
+  }
+
+  //Asignar queja a punto de atencion 
+  asignarQuejaPunto(asignarQuejaPunto: AsignarQuejaPunto){
+    return this.http.post(`${this.URL_API_Q}asignarquejapunto`, asignarQuejaPunto);
+  }
+
+  //actualizar estado y resultado de queja
+  actualizarEstadoResultadoQueja(tipo_queja, id_queja, queja: Queja){
+    console.log(queja)
+    return this.http.put(`${this.URL_API_Q}actualizarestadoqueja/${tipo_queja}/${id_queja}`, queja);
   }
 }
