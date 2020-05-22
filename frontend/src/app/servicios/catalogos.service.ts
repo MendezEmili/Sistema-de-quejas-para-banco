@@ -20,6 +20,7 @@ export class CatalogosService {
   URL_API_LG= this.baseURL + 'auth/';
   URL_API_DQ= this.baseURL + 'detallequeja/';
   URL_API_Q = this.baseURL + 'queja/'
+  URL_API_RE = this.baseURL + 'reporte/'
 
   constructor(private http: HttpClient) { }
 
@@ -177,4 +178,7 @@ export class CatalogosService {
 
   //Reportes 
   //Reporte por numero de reporte
+  reporteNoQueja(tipo, id, fecha){
+    return this.http.get(`${this.URL_API_RE}noqueja/${tipo}/${id}/${fecha}`);
+  }
 }

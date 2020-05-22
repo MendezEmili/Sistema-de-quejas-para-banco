@@ -9,7 +9,7 @@ reporteCtrl.noQueja = async(req, res)=>{
     var id_queja = req.params.id_queja;
     var fecha = req.params.fecha;
   
-    var sql = `SELECT q.id_queja, q.tipo_queja, pa.nombre_puntodeatencion, ee.estado, ei.estado_i, mi.descripcion_medio, q.resultado, q.fecha_ingreso FROM queja q 
+    var sql = `SELECT q.id_queja, q.tipo_queja, pa.nombre_puntodeatencion, ee.estado, ei.estado_i, mi.descripcion_medio, q.resultado, q.fecha_ingreso, q.detalle_queja FROM queja q 
     INNER JOIN estados_externos ee ON q.estado_externo = ee.id_estado_externo 
     INNER JOIN puntosdeatencion pa ON pa.id = q.oficina
     INNER JOIN estados_internos ei ON ei.id_estado_interno = q.estado_interno
