@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { NgxFileDropModule} from 'ngx-file-drop';
+import {RecaptchaModule} from 'ng-recaptcha';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,8 @@ import { TipoQuejaComponent } from './componentes/tipo-queja/tipo-queja.componen
 import { QuejaComponent } from './componentes/queja/queja.component';
 import { AutoconsultaComponent } from './componentes/autoconsulta/autoconsulta.component';
 import { QuejasIgresadasComponent } from './componentes/quejas-igresadas/quejas-igresadas.component';
+
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -34,9 +37,13 @@ import { QuejasIgresadasComponent } from './componentes/quejas-igresadas/quejas-
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgxFileDropModule
+    NgxFileDropModule,
+    RecaptchaModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+  
+}

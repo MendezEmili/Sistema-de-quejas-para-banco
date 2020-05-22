@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, ReactiveFormsModule } from '@angular/forms';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
-
+import { RecaptchaModule } from 'ng-recaptcha';
 import { MedioIngreso } from '../../modelos/medio-ingreso';
 import { PuntosAtencion } from '../../modelos/puntos-atencion';
 import { Queja } from '../../modelos/queja';
 import { CatalogosService } from 'src/app/servicios/catalogos.service';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 @Component({
   selector: 'app-queja',
   templateUrl: './queja.component.html',
-  styleUrls: ['./queja.component.css']
+  styleUrls: ['./queja.component.css'],
+  template: `<re-captcha (resolved)="resolved($event)" siteKey="6LcaCfsUAAAAAIGB129_oMhbh_7CpHPIzPK-Cthd"></re-captcha>`
 })
 export class QuejaComponent implements OnInit {
 
@@ -179,4 +181,8 @@ export class QuejaComponent implements OnInit {
   public fileLeave(event){
     console.log(event);
   }
+  
+  resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+}
 }
