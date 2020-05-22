@@ -17,6 +17,7 @@ import { AutoconsultaComponent } from './componentes/autoconsulta/autoconsulta.c
 import { QuejasIgresadasComponent } from './componentes/quejas-igresadas/quejas-igresadas.component';
 import { SeguimientoQuejasAsignadasComponent } from './componentes/seguimiento-quejas-asignadas/seguimiento-quejas-asignadas.component';
 import { QuejasProcesoAtencionComponent } from './componentes/quejas-proceso-atencion/quejas-proceso-atencion.component';
+import { ReporteComponent } from './componentes/reporte/reporte.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { QuejasProcesoAtencionComponent } from './componentes/quejas-proceso-ate
     AutoconsultaComponent,
     QuejasIgresadasComponent,
     SeguimientoQuejasAsignadasComponent,
-    QuejasProcesoAtencionComponent
+    QuejasProcesoAtencionComponent,
+    ReporteComponent
   ],
   imports: [
     BrowserModule,
