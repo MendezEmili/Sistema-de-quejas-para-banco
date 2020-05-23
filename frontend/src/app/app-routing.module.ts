@@ -11,7 +11,7 @@ import { QuejasIgresadasComponent } from './componentes/quejas-igresadas/quejas-
 import { SeguimientoQuejasAsignadasComponent } from './componentes/seguimiento-quejas-asignadas/seguimiento-quejas-asignadas.component';
 import { QuejasProcesoAtencionComponent } from './componentes/quejas-proceso-atencion/quejas-proceso-atencion.component';
 import { ReporteComponent } from './componentes/reporte/reporte.component';
-
+import {RecaptchaComponent} from './componentes/recaptcha/recaptcha.component'
 const routes: Routes = [
   {
     path: 'usuarios',
@@ -56,6 +56,10 @@ const routes: Routes = [
   {
     path: 'reporte',
     component: ReporteComponent
+  },
+  {
+    path: 'recaptcha',
+    component: RecaptchaComponent
   }
 ];
 

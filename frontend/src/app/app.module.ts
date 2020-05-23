@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxFileDropModule} from 'ngx-file-drop';
 import {RecaptchaModule} from 'ng-recaptcha';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
@@ -24,7 +25,9 @@ import { from } from 'rxjs';
 import { RecaptchaComponent } from './componentes/recaptcha/recaptcha.component';
 import { PdfMakeWrapper } from 'pdfmake-wrapper';
 import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
- 
+
+
+
 // Set the fonts to use
 PdfMakeWrapper.setFonts(pdfFonts);
 
@@ -54,7 +57,8 @@ PdfMakeWrapper.setFonts(pdfFonts);
     NgxFileDropModule,
     RecaptchaModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

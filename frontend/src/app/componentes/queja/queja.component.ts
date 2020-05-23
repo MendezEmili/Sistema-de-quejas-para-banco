@@ -20,8 +20,11 @@ export class QuejaComponent implements OnInit {
 
   autorizacion: boolean;
   ingresoQueja: boolean;
+  autocaptcha: boolean=false;
+  
   error: any;
-
+  recaptcha:any[];
+  
   medioIngreso: MedioIngreso = {
     id_medio_ingreso_queja: 0,
     descripcion_medio: ''
@@ -104,8 +107,13 @@ export class QuejaComponent implements OnInit {
     )
   }
 
+
   ingresarQueja(){
+    this.autocaptcha=true;
+
+   if (this.recaptcha!=null){
     this.ingresoQueja = true;
+    this.autocaptcha=false;
 
     this.catalogosService.obtenerMediosIngreso().subscribe(
       res =>{
@@ -125,6 +133,7 @@ export class QuejaComponent implements OnInit {
         alert(this.error.error)
       }
     )
+   }
   }
 
   resetForm(form?: NgForm){
@@ -182,7 +191,15 @@ export class QuejaComponent implements OnInit {
     console.log(event);
   }
   
-  resolved(captchaResponse: string) {
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
+ 
+
+
+
+resolved(captchaResponse:any[]){
+  this.recaptcha=captchaResponse;
+  console.log(this.recaptcha);
 }
+
+
+
 }

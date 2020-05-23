@@ -4,7 +4,13 @@
         <h2 class="text-center">Queja</h2> 
         <hr class="bg-success">
     </div>
-  
+
+   <div class="row">
+     <div class="col-2 col-sm-4 col-md-4 col-lg-4"></div>
+  <div class="recaptcha col-3 col-sm-4 col-md-4 col-lg-4"   *ngIf="autocaptcha" > 
+    <re-captcha (resolved)= "resolved ($event)" siteKey="6LchJ_sUAAAAAAfy4I99RKZArIty8NEM8NjYD9Mv"></re-captcha>
+</div>
+</div>
     <div class="row">
         <div class="col-1 col-sm-2 col-md-3">
 
@@ -14,11 +20,15 @@
             <div class="mt-4 mb-4">
               <button type="button" class="btn btn-success btn-lg btn-block" (click)="ingresarQueja();">Nueva queja</button>
             </div>
+
+
             <div class="mt-4">
               <button type="button" class="btn btn-success btn-lg btn-block" routerLink="/home" >Salir</button> <!---->
             </div>
         </div>
         </div>
+
+
         <div *ngIf="ingresoQueja" class="col-10 col-sm-8 col-md-6">
             <form #formularioQueja = "ngForm">
                 
@@ -90,7 +100,10 @@
         </div>
     </div>
   
-   
-
+   <br>
+   <br>
+   <br>
+   <br>
+  
 
 

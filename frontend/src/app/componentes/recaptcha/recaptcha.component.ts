@@ -1,20 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-export interface FormModel {
-  captcha?: string;
-}
-
-
 @Component({
   selector: 'app-recaptcha',
   templateUrl: './recaptcha.component.html',
-  styleUrls: ['./recaptcha.component.css'],
-
-  
-  styles: [`
-  .error { color: crimson; }
-  .success { color: green; }
-` ]
+  styleUrls: ['./recaptcha.component.css']
 })
 export class RecaptchaComponent implements OnInit {
 
@@ -23,5 +12,11 @@ export class RecaptchaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public formModel: FormModel = {};
+recaptcha:any[];
+  resolved(captchaResponse:any[]){
+    this.recaptcha=captchaResponse;
+    console.log(this.recaptcha);
+    
+  }
+
 }
