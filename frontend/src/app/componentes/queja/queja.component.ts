@@ -96,7 +96,8 @@ export class QuejaComponent implements OnInit {
     this.catalogosService.insertarQueja(this.queja).subscribe(
       res =>{
         console.log(res)
-        alert(this.queja.resultado);
+        this.quejas = res; 
+        alert("La queja no. "+ this.quejas[0].tipo_queja + "-"+ this.quejas[0].id_queja + "-2020 ha sido ingresada exitosamente al control de quejas");
         location.reload();
       }, 
       err =>{

@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const fecha = require('../modelos/fechas')
 const quejaCtrl = {};
+const envCorreo = require('../modelos/correo');
 
 //Insertar queja nueva
 quejaCtrl.insertarQueja = async(req, res)=>{
@@ -39,16 +40,39 @@ quejaCtrl.insertarQueja = async(req, res)=>{
         resultado,
         justificacion
     }
-    console.log(queja)
     await conexion.query("INSERT INTO queja SET ?", queja, (err, resultado)=>{
         if (err) {
             console.log("No fue posible insertar")
             return res.status(400).send("No fue posible insertar");
           } else {
-            console.log("Insertado correctamente");
-            return res.json({
-              status: 200,
-              mensaje: "Insertado correctamente"
+            console.log("Insertado correctamente" + fecha_ingreso);
+            conexion.query(`SELECT id_queja, tipo_queja FROM queja WHERE fecha_ingreso="${fecha_ingreso}" AND nombre="${nombre}"`, (err, result)=>{
+              if(err){
+                return res.status(404).send("Queja no encontrado");
+              } else {
+                console.log(result)
+                contentHTML = `
+                <p>Señor cuentahabiente,  agradecemos su comunicación,  
+                le informamos que su queja ha sido recibida exitosamente. 
+                Para el seguimiento o cualquier consulta relacionada, 
+                no olvide que el número de su queja es ${result[0].tipo_queja}-${result[0].id_queja}-2020<p>
+                `;
+
+                envCorreo.transporter.sendMail({
+                  from: '"Banco mi pistio" <banco@gmail.com>',
+                  to: 'usuario@gmail.com',
+                  subject: 'Sistema de quejas',
+                  html: contentHTML
+                })
+
+                envCorreo.transporter.sendMail({
+                  from: '"Banco mi pistio" <banco@gmail.com>',
+                  to: 'usuario@gmail.com',
+                  subject: 'Queja creada',
+                  text: 'El sistema de quejas le informa que se ha recibido una queja, la cual debe ser asignada dentro de las próximas 24 horas'
+                })
+                return res.json(result);         
+              }
             })
           }
     });
@@ -99,14 +123,29 @@ quejaCtrl.asignarQueja = async(req, res) =>{
 
   await conexion.query("INSERT INTO asignar_queja_punto SET ?", asignarQueja, (err, resultado)=>{
     if(err){
-      return res.status(400).send("No fue posible asignar la queja al punto de atención")
       console.log("No fue posible asignar la queja al punto de atención")
+      return res.status(400).send("No fue posible asignar la queja al punto de atención")
+      
     } else {
+      console.log("Asignada correctamente")
+      envCorreo.transporter.sendMail({
+        from: '"Banco mi pistio" <banco@gmail.com>',
+        to: 'usuario@gmail.com',
+        subject: 'Sistema de quejas',
+        text: 'Señor(a) Cuentahabiente, su queja ha sido trasladada al administrador del punto de atención correspondiente para su análisis'
+      })
+
+      envCorreo.transporter.sendMail({
+        from: '"Banco mi pistio" <banco@gmail.com>',
+        to: 'usuario@gmail.com',
+        subject: 'Queja creada',
+        text: 'Estimado(a) El sistema para control de quejas por mal servicio o servicio no conforme le informa que se le asignó la queja No. [##########]”Para su atención tiene un plazo máximo de 5 días hábiles, según normativa vigente.'
+      })
       return res.json({
         status: 200,
         mensaje: "Queja asignada correctamente"
       })
-      console.log("Asignada correctamente")
+      
     }
   })
 }
@@ -124,14 +163,15 @@ quejaCtrl.actualizarEstadoResultadoQueja = async(req, res) =>{
 
   await conexion.query(sql, (err, resultado)=>{
     if(err){
-      return res.status(400).send("Error al cambiar estado de queja")
       console.log("Error al cambiar estado de queja")
+      return res.status(400).send("Error al cambiar estado de queja")  
     } else {
+      console.log("Estados actualizados correctamente")
       return res.json({
         status: 200,
         mensaje: "Queja actualizada correctamente"
       })
-      console.log("Estados actualizados correctamente")
+      
     }
   })
 }
@@ -148,14 +188,15 @@ quejaCtrl.actualizarEstadoQueja = async(req, res) =>{
 
   await conexion.query(sql, (err, resultado)=>{
     if(err){
-      return res.status(400).send("Error al cambiar estado de queja")
       console.log("Error al cambiar estado de queja")
+      return res.status(400).send("Error al cambiar estado de queja")     
     } else {
+      console.log("Estados actualizados correctamente")
       return res.json({
         status: 200,
         mensaje: "Queja actualizada correctamente"
       })
-      console.log("Estados actualizados correctamente")
+      
     }
   })
 }

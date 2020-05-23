@@ -23,6 +23,7 @@
     "jquery": "^3.4.1",
     "ng-recaptcha": "^5.0.0",
     "ngx-file-drop": "^9.0.1",
+    "nodemailer": "^6.4.6",
     "pdfmake": "^0.1.65",
     "pdfmake-wrapper": "^2.0.0",
     "popper.js": "^1.16.1",

@@ -3,26 +3,88 @@
         <h2 class="text-center">Reportes de las quejas</h2>
         <hr class="bg-success">
     </div>
-    <button (click)="generarPDF();">Generar PDF</button>
+    
     <div class="row">
         <div class="col-3">
-            <div class="rounded-pill bg-success">
+            <div class="rounded-pill bg-success pt-4 pb-4 text-center">
                 Consulta
             </div>
             <table class="table">
-                <thead class="bg-success">
-                    <th></th>
-                </thead>
                 <tbody>
-                    <tr>Fechas</tr>
-                    <tr>No. queja</tr>
+                    <tr (click)="reporteFechas=true">Fechas</tr>
+                    <tr (click)="reporteNoQueja=true">No. queja</tr>
                     <tr>Región</tr>
                     <tr>Puntos de atención</tr>
                 </tbody>
             </table>
         </div>
         <div class="col">
-
+            <!--consulta fechas-->
+            <div class="mt-4 mb-4" *ngIf="reporteFechas"> 
+                <h5 class="mt-4 mb-4">Reporte por fechas </h5>
+                <form #formularioAutoconsulta = "ngForm">   
+                    <div class="form-group">       
+                      <div class="row">
+                        <div class="col">
+                            <label for="exampleFormControlInput1">Fecha inicial</label>
+                            <input type="date" class="form-control" id="exampleFormControlInput1" [(ngModel)]="queja.id_queja" name="id_queja"> <!---->
+                        </div>
+                        <div class="col">
+                            <label for="exampleFormControlInput1">Fecha final</label>
+                            <input type="date" class="form-control" id="exampleFormControlInput1" [(ngModel)]="queja.id_queja" name="id_queja"> <!---->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                                <button class="btn btn-success btn-lg" (click)="generarPDF();">Generar PDF</button>
+                            </div>
+                            <div class="mt-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                                <button type="button" class="btn btn-success btn-lg" (click)="resetForm(formularioAutoconsulta);">Cancelar</button> <!---->
+                            </div>
+                        </div>
+                    </div>
+                  </form>
+            </div>
+            <!--Consulta no de queja -->
+            <div class="mt-4 mb-4" *ngIf="reporteNoQueja"> 
+                <h5 class="mt-4 mb-4">Reporte por No. queja </h5>
+                <form #formularioAutoconsulta = "ngForm">   
+                    <div class="form-group">       
+                      <div class="row">
+                        <div class="col">
+                            <label for="exampleFormControlSelect1">Tipo de queja</label>
+                            <select class="form-control" id="modificarPuntoAtencion" [(ngModel)]="queja.tipo_queja" name="tipo_queja">
+                                <option></option>
+                                <option>QMS</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="exampleFormControlInput1">No. Queja</label>
+                            <input type="number" class="form-control" id="exampleFormControlInput1" [(ngModel)]="queja.id_queja" name="id_queja"> <!---->
+                        </div>
+                        <div class="col">
+                            <label for="exampleFormControlInput1">Año</label>
+                            <select class="form-control" id="year" [(ngModel)]="queja.ingreso_queja" name="ingreso_queja">
+                                <option>2020</option>
+                                <option>2019</option>
+                            </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="mt-2 mb-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                                <button class="btn btn-success btn-lg" (click)="generarPDF();">Generar PDF</button>
+                            </div>
+                            <div class="mt-2 col-8 col-sm-7 col-md-4 col-lg-3">
+                                <button type="button" class="btn btn-success btn-lg" (click)="resetForm(formularioAutoconsulta);">Cancelar</button> <!---->
+                            </div>
+                        </div>
+                    </div>
+                  </form>
+            </div>
         </div>
     </div>
 </div>

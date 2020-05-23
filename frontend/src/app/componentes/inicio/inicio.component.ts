@@ -55,6 +55,7 @@ export class InicioComponent implements OnInit {
           this.pPuntosAtencion = true;
           this.pUsuarios = true;
           this.pTipoQueja = true;
+          this.pReporte = true;
           break;
         case "Recepctor":
           break;

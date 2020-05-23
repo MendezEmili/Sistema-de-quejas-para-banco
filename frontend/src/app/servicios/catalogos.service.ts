@@ -181,4 +181,9 @@ export class CatalogosService {
   reporteNoQueja(tipo, id, fecha){
     return this.http.get(`${this.URL_API_RE}noqueja/${tipo}/${id}/${fecha}`);
   }
+
+  //Reporte por fechas
+  reporteFechasQueja(fecha1, fecha2){
+    return this.http.get(`${this.URL_API_RE}fechaquejas/${fecha1}/${fecha2}`);
+  }
 }
