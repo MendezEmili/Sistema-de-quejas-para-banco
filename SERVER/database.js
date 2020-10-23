@@ -1,10 +1,10 @@
 var mysql = require('mysql');
 
 var conexion = mysql.createConnection({
-    host: "localhost",
+    host: "chamilo.cjesba5rpuyf.us-east-1.rds.amazonaws.com",
     port: "3306",
-    user: "root",
-    password: "",
+    user: "admin",
+    password: "admin123",
     database: "mipistio"
   });
 
