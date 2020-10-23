@@ -48,7 +48,10 @@ quejaCtrl.insertarQueja = async(req, res)=>{
             console.log("Insertado correctamente" + fecha_ingreso);
             conexion.query(`SELECT id_queja, tipo_queja FROM queja WHERE fecha_ingreso="${fecha_ingreso}" AND nombre="${nombre}"`, (err, result)=>{
               if(err){
-                return res.status(404).send("Queja no encontrado");
+                return res.json({
+                  status: 400,
+                  error: "no fue posible insertar"
+                });
               } else {
                 console.log(result)
                 contentHTML = `

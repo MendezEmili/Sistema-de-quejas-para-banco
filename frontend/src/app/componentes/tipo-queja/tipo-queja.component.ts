@@ -73,26 +73,31 @@ export class TipoQuejaComponent implements OnInit {
   }
 
   actualizar(siglas, descripcion_tq, estado){
-    if(estado == "Inactivo"){
-      this.tipoQueja.estado_tq = 0;
-    } else{
-      this.tipoQueja.estado_tq = 1;
+    var confirmar = confirm("“¿Está seguro de guardar los cambios realizados?")
+    if(confirmar){
+      if(estado == "Inactivo"){
+        this.tipoQueja.estado_tq = 0;
+      } else{
+        this.tipoQueja.estado_tq = 1;
+      }
+      this.tipoQueja.descripcion_tq = descripcion_tq;
+      this.tipoQueja.siglas = siglas;
+      console.log(this.tipoQueja)
+      this.catalogosService.actualizarTipoQueja(siglas, this.tipoQueja).subscribe(
+       res =>{
+         this.respuesta = res; 
+         alert(this.respuesta.mensaje);
+         location.reload();
+       },
+       err =>{
+         this.error = err; 
+         alert(this.error.error);
+       }
+      )
+  
+    } else {
+      location.reload();
     }
-    this.tipoQueja.descripcion_tq = descripcion_tq;
-    this.tipoQueja.siglas = siglas;
-    console.log(this.tipoQueja)
-    this.catalogosService.actualizarTipoQueja(siglas, this.tipoQueja).subscribe(
-     res =>{
-       this.respuesta = res; 
-       alert(this.respuesta.mensaje);
-       location.reload();
-     },
-     err =>{
-       this.error = err; 
-       alert(this.error.error);
-     }
-    )
-
   }
 
   establecerValores(descripcion_tq, siglas){
